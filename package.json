@@ -1,0 +1,25 @@
+{
+  "name": "cs340-group-project",
+  "version": "1.0.0",
+  "description": "CS340 Spring 2019 Project, by Christina Brasco and Amy Suzuki; Artsy database project built in Node, deployed with Heroku ",
+  "main": "dbindex.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dbindex.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cb92/CS340-Group-Project.git"
+  },
+  "author": "Christina Brasco and Amy Suzuki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cb92/CS340-Group-Project/issues"
+  },
+  "homepage": "https://github.com/cb92/CS340-Group-Project#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2"
+  }
+}
