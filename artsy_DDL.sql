@@ -51,15 +51,6 @@ CREATE TABLE `gene` (
 	PRIMARY KEY ('id')
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `gene`;
-CREATE TABLE `gene` (
-	`id` int(11) NOT NULL AUTO_INCREMENT, 
-	`name` varchar(255) NOT NULL,
-	`description` varchar(255),
-	PRIMARY KEY (`id`)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-
 DROP TABLE IF EXISTS `artwork_gene`;
 CREATE TABLE `artwork_gene` (
 	`artwork_id` int(11) NOT NULL,
