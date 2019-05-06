@@ -15,13 +15,46 @@ app.get("/", function(req, res){
 	res.render("home.handlebars");
 });
 
-app.get("/test1", function(req, res){
-	res.render("test1.handlebars");
+app.get("/new_artist", function(req, res){
+	res.render("new_artist.handlebars");
 });
 
-app.get("/test2", function(req, res){
-	res.render("test2.handlebars");
+app.get("/new_partner", function(req, res){
+	res.render("new_partner.handlebars");
 });
+
+app.get("/new_gene", function(req, res){
+	res.render("new_gene.handlebars");
+});
+
+app.get("/new_artwork", function(req, res){
+	res.render("new_artwork.handlebars");
+});
+
+app.get("/new_artistPartner", function(req, res){
+	res.render("new_artistPartner.handlebars");
+});
+
+app.get("/new_artworkGene", function(req, res){
+	res.render("new_artworkGene.handlebars");
+});
+
+app.get("/move-artwork", function(req, res){
+	res.render("move-artwork.handlebars");
+});
+
+app.get("/close-museum", function(req, res){
+	res.render("close-museum.handlebars");
+});
+
+app.get("/creative-difference", function(req, res){
+	res.render("creative-difference.handlebars");
+});
+
+app.get("/display_art_genes", function(req, res){
+	res.render("display_art_genes.handlebars");
+});
+
 
 /* Error handling boilerplate*/
 app.use(function(req, res){
