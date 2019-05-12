@@ -71,8 +71,8 @@ CREATE TABLE `artwork` (
 
 INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
 VALUES
-('The Starry Night',1, 'Painting','Oil on Canvas',1889, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg', NULL),
-('Girl before a Mirror',3, 'Painting','Oil on Canvas',1932, 'https://upload.wikimedia.org/wikipedia/en/6/60/GirlBeforeAMirror.jpg', NULL);
+('The Starry Night',1, 'Painting',1889, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg', NULL),
+('Girl before a Mirror',3, 'Painting',1932, 'https://upload.wikimedia.org/wikipedia/en/6/60/GirlBeforeAMirror.jpg', NULL);
 
 
 
