@@ -60,7 +60,6 @@ CREATE TABLE `artwork` (
 	`title` varchar(255) NOT NULL,
 	`artist_id` int(11) NOT NULL,
 	`category` varchar(255),
-	`medium` varchar(255),
 	`date` int(11),
 	`thumbnail_url` varchar(255),
 	`partner_id` int(11),
