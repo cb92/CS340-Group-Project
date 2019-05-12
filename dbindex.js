@@ -35,24 +35,12 @@ app.get("/new_artistPartner", function(req, res){
 	res.render("new_artistPartner.handlebars");
 });
 
-app.get("/new_artworkGene", function(req, res){
-	res.render("new_artworkGene.handlebars");
-});
-
-app.get("/move-artwork", function(req, res){
-	res.render("move-artwork.handlebars");
-});
-
 app.get("/close-museum", function(req, res){
 	res.render("close-museum.handlebars");
 });
 
 app.get("/creative-difference", function(req, res){
 	res.render("creative-difference.handlebars");
-});
-
-app.get("/display_art_genes", function(req, res){
-	res.render("display_art_genes.handlebars");
 });
 
 
