@@ -10,5 +10,59 @@
     <input type="date" name="deathday"> <br>
     Biography: <br>
     <textarea rows="4" cols="50" name="comment" form="newArtist"></textarea> <br>
+    <br>
+    <br>
+    Artwork: <br>
+    Title: <br>
+    <input type="text" name="title"> <br>
+    Artist: <br>
+    <select name="artist">
+      <option value="artist1">artist1</option>
+      <option value="artist2">artist2</option>
+      <option value="artist3">artist3</option>
+      <option value="artist4">artist4</option>
+    </select> <br>
+    Category: <br>
+    <input type="text" name="category"> <br>
+    Medium: <br>
+    <input type="text" name="medium"> <br>
+    Date: <br>
+    <input type="date" name="date"> <br>
+    Thumbnail URL: <br>
+    <input type="url" name="thumbnail"> <br>
+    Partner: <br>
+    <select name="partner">
+      <option value="null">NONE</option>
+      <option value="partner1">partner1</option>
+      <option value="partner2">partner2</option>
+      <option value="partner3">partner3</option>
+      <option value="partner4">partner4</option>
+    </select> <br>
+
+    Gene (Select at least one): <br>
+    <select multiple required name="genes_to_link">
+      <option value="gene1">gene1</option>
+      <option value="gene2">gene2</option>
+      <option value="gene3">gene3</option>
+      <option value="gene4">gene4</option>
+    </select> <br>
+
     <input type="submit">
 </form>
+
+<table>
+  <tr>
+    <th>Artist</th>
+    <th>Hometown</th>
+    <th>Birthday</th>
+    <th>Deathday</th>
+    <th>Biography</th>
+  </tr>
+  <tr>
+    <td>Andy Warhol</td>
+    <td>Pittsburgh, PA, United States</td>
+    <td>1928</td>
+    <td>1987</td>
+    <td>An American painter, printmaker, sculptor, draughtsman, illustrator, filmmaker, writer and collector</td>
+  </tr>
+</table>
