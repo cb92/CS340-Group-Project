@@ -1,6 +1,14 @@
 
-# artist table and sample data inserted
+# Remove Previous tables as neccessary
+DROP TABLE IF EXISTS `artwork_gene`;
+DROP TABLE IF EXISTS `gene`;
+DROP TABLE IF EXISTS `artwork`;
+DROP TABLE IF EXISTS `artist_partner`;
+DROP TABLE IF EXISTS `partner`;
 DROP TABLE IF EXISTS `artist`;
+
+
+# artist table and sample data inserted
 CREATE TABLE `artist` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
@@ -19,14 +27,14 @@ VALUES ('Vincent Van Gogh','Zundert',1853, 1890, 'a Dutch post-impressionist pai
 
 
 # partner table and sample data inserted
-DROP TABLE IF EXISTS `partner`;
 CREATE TABLE `partner` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`type` varchar(255),
 	`email` varchar(255),
 	`region` varchar(255),
-	PRIMARY KEY (`id`)
+	PRIMARY KEY (`id`),
+	CONSTRAINT UC_partner UNIQUE (name, email, region)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO partner (name, type, email, region)
@@ -34,7 +42,6 @@ VALUES ('The Met','Museum','met@met.com','North America'),
 ('The Louvre','Museum','louvre@louvre.com','Europe');
 
 #artist_partner table and sample data inserted
-DROP TABLE IF EXISTS `artist_partner`;
 CREATE TABLE `artist_partner` (
 	`artist_id` int(11) NOT NULL,
 	`partner_id` int(11) NOT NULL,
@@ -48,7 +55,6 @@ VALUES (1, 1),(1, 2),(2, 2);
 
 
 # artwork table and sample data inserted
-DROP TABLE IF EXISTS `artwork`;
 CREATE TABLE `artwork` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`title` varchar(255) NOT NULL,
@@ -72,12 +78,12 @@ VALUES
 
 
 # gene table and sample data inserted
-DROP TABLE IF EXISTS `gene`;
 CREATE TABLE `gene` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`name` varchar(255) NOT NULL,
 	`description` varchar(255),
-	PRIMARY KEY (`id`)
+	PRIMARY KEY (`id`),
+	CONSTRAINT UC_gene UNIQUE (name)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO gene (name, description)
@@ -86,7 +92,6 @@ VALUES ('Pointilism','lots of points that compose an image'),
 
 
 # artwork_gene table and sample data inserted
-DROP TABLE IF EXISTS `artwork_gene`;
 CREATE TABLE `artwork_gene` (
 	`artwork_id` int(11) NOT NULL,
 	`gene_id` int(11) NOT NULL,
