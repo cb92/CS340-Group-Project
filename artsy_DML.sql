@@ -2,68 +2,77 @@
 -- denote the variables that will have data from the backend programming language
 
 
-### ADD ARTIST PAGE
+### ARTIST PAGE
 INSERT INTO artist (name, hometown, birthday, deathday, biography)
 VALUES  (:name, :hometown, :birthday, :deathday, :biography);
 
-### ADD PARTNER PAGE
+INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
+VALUES (:title, (SELECT id FROM artist WHERE name = :name and birthday=:birthday), :category, :medium, :date, :thumbnail_url, :partner_id);
+
+# NOTE: since an arbitrary number of genes can be selected, this query will be run with every selected gene (each iteratively substituted into the :selected_gene_id_i variable)
+INSERT INTO artwork_gene (artwork_id, gene_id)
+VALUES ((SELECT id FROM artwork where title=:title and artist_id = (SELECT id FROM artist WHERE name = :name and birthday=:birthday) and date = :date), :selected_gene_id_i);
+
+SELECT name FROM gene; -- to populate Gene list in Artwork  
+SELECT * FROM artist; -- to populate Artist table
+
+
+### PARTNER PAGE
 INSERT INTO partner (name, type, email, region)
 VALUES (:name, :type, :email, :region);
 
-### LINK ARTIST/PARTNER PAGE, including SELECT queries to populate toggles
-SELECT name from artist;
-SELECT name from partner;
-INSERT INTO artist_partner (artist_id, partner_id)
-VALUES (:artist_id, :partner_id);
-
-### ADD ARTWORK PAGE, including SELECT queries to populate toggles
-SELECT name from artist;
-SELECT name from partner;
-INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
-VALUES (:title, :artist_id, :category, :medium, :date, :thumbnail_url, :partner_id);
-
-### ADD GENE PAGE
-INSERT INTO gene (id, name, description)
-VALUES (:id, :name, :description);
-
-
-# LINK ARTWORK/GENE PAGE, including SELECT queries to populate toggles
-SELECT name from artwork;
-SELECT name from gene;
-INSERT INTO artwork_gene (artwork_id, gene_id)
-VALUES (:artwork_id, :gene_id);
-
-
-### "Close Museum" page/DELETE partner SQL code, including SELECT to populate
-SELECT name, region FROM partner;
-
-UPDATE artwork SET partner_id=NULL
-WHERE partner_id = :id_to_delete;
-
-DELETE FROM artist_partner
-WHERE partner_id = :id_to_delete;
+SELECT * FROM partner; -- to populate table
 
 DELETE FROM partner
 WHERE id = :id_to_delete;
 
 
-### "Creative Difference"/DELETE partner-artist relationship SQL code, including SELECT to populate
+### GENE PAGE
+INSERT INTO gene (id, name, description)
+VALUES (:id, :name, :description);
+
+# NOTE: since an arbitrary number of artworks can be selected for a new gene, this query will be run with every selected artwotk (each iteratively substituted into the :selected_artwork_id_i variable)
+INSERT INTO artwork_gene (artwork_id, gene_id)
+VALUES (:selected_artwork_id_i, (SELECT id FROM gene where name = :name));
+
+SELECT * FROM gene;
+
+
+### ARTIST PARTNER PAGE
+SELECT name from artist;
+SELECT name from partner;
+INSERT INTO artist_partner (artist_id, partner_id)
+VALUES (:artist_id, :partner_id);
+
 SELECT * from artist_partner;
 
 DELETE FROM artist_partner
 WHERE partner_id = :pid_to_delete
 AND artist_id = :aid_to_delete;
 
+### ARTWORK PAGE
+SELECT name from artist;
+SELECT name from partner;
+SELECT name from gene;
+INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
+VALUES (:title, :artist_id, :category, :medium, :date, :thumbnail_url, :partner_id);
 
-### "Move Artwork"/Move artwork page, includingSELECT queries to populate page
-SELECT name, category, medium FROM artwork;
+# NOTE: since an arbitrary number of genes can be selected, this query will be run with every selected gene (each iteratively substituted into the :selected_gene_id_i variable)
+INSERT INTO artwork_gene (artwork_id, gene_id)
+VALUES ((SELECT id FROM artwork where title=:title and artist_id = :artist_id and date = :date), :selected_gene_id_i);
+
+# to update partner
 SELECT name, region FROM partner;
 
 UPDATE artwork SET partner_id = :pid_selected
 WHERE id = :aid_to_move;
 
+# Display Artwork SELECT query
+SELECT a.title, a.thumbnail_url, a.date, a.category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM (
+	SELECT a.title, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name
+	FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id 
+	left join gene g on ag.gene_id=g.id
+	left join partner p on a.partner_id = p.id)
+GROUP BY a.title, a.thumbnail_url, a.date, a.category, partner_name;
 
-###"Display Artwork" page SELECT query
-SELECT a.title, a.thumbnail_url, g.name
-FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id 
-left join gene g on ag.gene_id=g.id
+

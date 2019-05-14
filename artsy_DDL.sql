@@ -46,8 +46,8 @@ CREATE TABLE `artist_partner` (
 	`artist_id` int(11) NOT NULL,
 	`partner_id` int(11) NOT NULL,
 	PRIMARY KEY (`artist_id`, `partner_id`),
-	FOREIGN KEY (`artist_id`) REFERENCES artist (`id`),
-	FOREIGN KEY (`partner_id`) REFERENCES partner (`id`)
+	FOREIGN KEY (`artist_id`) REFERENCES artist (`id`) ON DELETE CASCADE,
+	FOREIGN KEY (`partner_id`) REFERENCES partner (`id`) ON DELETE CASCADE
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO artist_partner (artist_id, partner_id)
@@ -64,12 +64,12 @@ CREATE TABLE `artwork` (
 	`thumbnail_url` varchar(255),
 	`partner_id` int(11),
 	PRIMARY KEY (`id`),
-	FOREIGN KEY (`artist_id`) REFERENCES artist (`id`),
-	FOREIGN KEY (`partner_id`) REFERENCES partner (`id`),
+	FOREIGN KEY (`artist_id`) REFERENCES artist (`id`) ON DELETE CASCADE,
+	FOREIGN KEY (`partner_id`) REFERENCES partner (`id`) ON DELETE SET NULL,
 	CONSTRAINT UC_artwork UNIQUE (title, artist_id, date)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
+INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)
 VALUES
 ('The Starry Night',1, 'Painting',1889, 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/600px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg', NULL),
 ('Girl before a Mirror',3, 'Painting',1932, 'https://upload.wikimedia.org/wikipedia/en/6/60/GirlBeforeAMirror.jpg', NULL);
@@ -95,8 +95,8 @@ CREATE TABLE `artwork_gene` (
 	`artwork_id` int(11) NOT NULL,
 	`gene_id` int(11) NOT NULL,
 	PRIMARY KEY(`artwork_id`, `gene_id`),
-	FOREIGN KEY (`artwork_id`) REFERENCES artwork (`id`),
-	FOREIGN KEY (`gene_id`) REFERENCES gene (`id`)
+	FOREIGN KEY (`artwork_id`) REFERENCES artwork (`id`) ON DELETE CASCADE,
+	FOREIGN KEY (`gene_id`) REFERENCES gene (`id`) ON DELETE CASCADE
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 INSERT INTO artwork_gene VALUES
