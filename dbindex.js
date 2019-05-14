@@ -22,6 +22,7 @@ app.get("/new_artist", function(req, res){
 	connection.query('SELECT * from artist;', function(err, rows, fields) {
   		if (err) throw err;
 		console.log(rows);
+		connection.end();
 	});
 	res.render("new_artist.handlebars");
 });
@@ -66,7 +67,7 @@ app.use(function(err, req, res, next){
 });
 
 
-connection.end();
+
 /* end of error handling boilerplate */
 
 // app listener
