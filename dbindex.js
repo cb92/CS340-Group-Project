@@ -19,11 +19,11 @@ app.get("/", function(req, res){
 });
 
 app.get("/new_artist", function(req, res){
-	connection.query('SELECT * from artist;', function(err, rows, fields) {
+	/*connection.query('SELECT * from artist;', function(err, rows, fields) {
   		if (err) throw err;
 		console.log(rows);
 		connection.end();
-	});
+	});*/
 	res.render("new_artist.handlebars");
 });
 
@@ -66,9 +66,10 @@ app.use(function(err, req, res, next){
 	res.render('500.handlebars');
 });
 
-
+connection.end();
 
 /* end of error handling boilerplate */
+
 
 // app listener
 app.listen(app.get('port'), function(){
