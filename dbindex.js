@@ -2,15 +2,18 @@
 var express = require('express');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-var mysql = require('mysql');
-
+var mysql = require('./dbcon.js');
 var bodyParser = require('body-parser');
-var connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL);
-connection.connect();
+//var connection = mysql.createConnection(process.env.JAWSDB_MARIA_URL);
+//connection.connect();
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
+//app.use('/static', express.static('public'));
 app.set('port',process.env.PORT || 3450); // compatible with Heroku deployment
+app.set('mysql',mysql);
 /* End of setup boilerplate */
 
 
@@ -19,11 +22,14 @@ app.get("/", function(req, res){
 });
 
 app.get("/new_artist", function(req, res){
-	/*connection.query('SELECT * from artist;', function(err, rows, fields) {
-  		if (err) throw err;
+	pool.query('SELECT * from artist', function(err, rows, fields) {
+  		if (err) 
+  		{
+  			next(err);
+  			return;
+  		}
 		console.log(rows);
-		connection.end();
-	});*/
+	});
 	res.render("new_artist.handlebars");
 });
 
@@ -65,8 +71,6 @@ app.use(function(err, req, res, next){
 	res.status(500);
 	res.render('500.handlebars');
 });
-
-connection.end();
 
 /* end of error handling boilerplate */
 
