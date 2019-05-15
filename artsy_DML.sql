@@ -15,7 +15,7 @@ VALUES ((SELECT id FROM artwork where title=:title and artist_id = (SELECT id FR
 
 SELECT name FROM gene; -- to populate Gene list in Artwork  
 SELECT * FROM artist; -- to populate Artist table
-
+SELECT name FROM partner;
 
 ### PARTNER PAGE
 INSERT INTO partner (name, type, email, region)

@@ -1,41 +1,48 @@
 <h2>Add Artist:</h2>
 <form class="" action="index.html" method="post" id="newArtist">
     Name: <br>
-    <input type="text" name="name"> <br>
+    <input required id = "artist_name" type="text" name="name"> <br>
     Hometown: <br>
-    <input type="text" name="hometown"> <br>
+    <input id = "artist_hometown" type="text" name="hometown"> <br>
     Birthday: <br>
-    <input type="date" name="birthday"> <br>
+    <input id = "artist_birth" type="date" name="birthday"> <br>
     Deathday: <br>
-    <input type="date" name="deathday"> <br>
+    <input id = "artist_death" type="date" name="deathday"> <br>
     Biography: <br>
-    <textarea rows="4" cols="50" name="comment" form="newArtist"></textarea> <br>
+    <textarea id = "artist_bio" rows="4" cols="50" name="comment" form="newArtist"></textarea> <br>
     <br>
     <br>
     Artwork: <br>
     Title: <br>
-    <input type="text" name="title"> <br>
+    <input required id = "artwork_title" type="text" name="artist_title"> <br>
     Category: <br>
-    <input type="text" name="category"> <br>
+    <input id = "artwork_category" type="text" name="artist_category"> <br>
     Date: <br>
-    <input type="date" name="date"> <br>
+    <input id = "artwork_date" type="date" name="artist_date"> <br>
     Thumbnail URL: <br>
-    <input type="url" name="thumbnail"> <br>
+    <input id = "artwork_thumbnail" type="url" name="artist_thumbnail"> <br>
     Partner: <br>
-    <select name="partner">
+    <select id = "artwork_partners" name="artist_partner">
       <option value="null">NONE</option>
-      <option value="partner1">partner1</option>
+      {{#each partners}}
+        <option value={{this.name}}>{{this.name}}</option>
+      {{/each}}
+
+      <!--option value="partner1">partner1</option>
       <option value="partner2">partner2</option>
       <option value="partner3">partner3</option>
-      <option value="partner4">partner4</option>
+      <option value="partner4">partner4</option-->
     </select> <br>
 
     Gene (Select at least one): <br>
-    <select multiple required name="genes_to_link">
-      <option value="gene1">gene1</option>
+    <select multiple required id = "artwork_genes" name="genes_to_link">
+      {{#each genes}}
+        <option value={{this.name}}>{{this.name}}</option>
+      {{/each}}
+      <!--option value="gene1">gene1</option>
       <option value="gene2">gene2</option>
       <option value="gene3">gene3</option>
-      <option value="gene4">gene4</option>
+      <option value="gene4">gene4</option-->
     </select> <br>
 
     <input type="submit">
@@ -51,11 +58,14 @@
     <th>Deathday</th>
     <th>Biography</th>
   </tr>
+
+  {{#each artists}}
   <tr>
-    <td>Andy Warhol</td>
-    <td>Pittsburgh, PA, United States</td>
-    <td>1928</td>
-    <td>1987</td>
-    <td>An American painter, printmaker, sculptor, draughtsman, illustrator, filmmaker, writer and collector</td>
+    <td>{{this.name}}</td>
+    <td>{{this.hometown}}</td>
+    <td>{{this.birthday}}</td>
+    <td>{{this.deathday}}</td>
+    <td>{{this.biography}}</td>
   </tr>
+  {{/each}}
 </table>

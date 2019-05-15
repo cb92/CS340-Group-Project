@@ -21,17 +21,11 @@ app.get("/", function(req, res){
 	res.render("home.handlebars");
 });
 
-app.get("/new_artist", function(req, res){
-	pool.query('SELECT * from artist', function(err, rows, fields) {
-  		if (err) 
-  		{
-  			next(err);
-  			return;
-  		}
-		console.log(rows);
-	});
+/*app.get("/new_artist", function(req, res){
 	res.render("new_artist.handlebars");
-});
+});*/
+
+app.use("/new_artist", require("./artist.js"));
 
 app.get("/new_partner", function(req, res){
 	res.render("new_partner.handlebars");
