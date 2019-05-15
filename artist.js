@@ -12,7 +12,7 @@ module.exports = function() {
 				res.end();
 			}
 			context.genes = results;
-			complete()
+			complete();
 
 		});
 	};
@@ -26,8 +26,7 @@ module.exports = function() {
 				res.end();
 			}
 			context.artists = results;
-			complete()
-
+			complete();
 		});
 	};
 
@@ -40,7 +39,7 @@ module.exports = function() {
 				res.end();
 			}
 			context.partners = results;
-			complete()
+			complete();
 
 		});
 
