@@ -59,4 +59,6 @@ module.exports = function() {
 				res.render('new_artist',context)
 		}
 	});
+
+	return router;
 }();
