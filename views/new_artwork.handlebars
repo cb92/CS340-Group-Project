@@ -4,10 +4,9 @@
     <input type="text" name="title"> <br>
     Artist: <br>
     <select name="artist">
-      <option value="artist1">artist1</option>
-      <option value="artist2">artist2</option>
-      <option value="artist3">artist3</option>
-      <option value="artist4">artist4</option>
+      {{#each artists}}
+        <option value={{this.name}}>{{this.name}}</option>
+      {{/each}}
     </select> <br>
     Category: <br>
     <input type="text" name="category"> <br>
@@ -18,18 +17,16 @@
     Partner: <br>
     <select name="partner">
       <option value="null">NONE</option>
-      <option value="partner1">partner1</option>
-      <option value="partner2">partner2</option>
-      <option value="partner3">partner3</option>
-      <option value="partner4">partner4</option>
+      {{#each partners}}
+        <option value={{this.name}}>{{this.name}}</option>
+      {{/each}}
     </select> <br>
 
     Gene (Select at least one): <br>
     <select multiple required name="genes_to_link">
-      <option value="gene1">gene1</option>
-      <option value="gene2">gene2</option>
-      <option value="gene3">gene3</option>
-      <option value="gene4">gene4</option>
+      {{#each genes}}
+        <option value={{this.name}}>{{this.name}}</option>
+      {{/each}}
     </select> <br>
 
     <input type="submit">
@@ -37,31 +34,20 @@
 
 <h2>Artwork in Collection</h2>
 <div class="card-columns">
-	<div class = "card" style = "width: 18rem;">
-		<img class="card-img-top" src="https://dynaimage.cdn.cnn.com/cnn/q_auto,w_412,c_fill,g_auto,h_412,ar_1:1/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F131107152744-mona-lisa.jpg" alt="Mona Lisa">
-		<div class = "card-body">
-			<h5 class="card-title">The Mona Lisa</h5><br>
-			<em>Category:</em> Painting<br>
-			<em>Date:</em> 1506<br>
-			<em>Genes:</em>"Portrait", "Renaissance", "Muted Colors"<br>
-			<em>Partner:</em> The Louvre<br>
-			<button class = "btn-primary" data-toggle="modal" data-target="#partnerChangeModal">Move Artwork</button>
-			<button class = "btn-secondary">Delete Artwork</button>
-		</div>
-	</div>
-
-	<div class = "card" style = "width: 18rem;">
-		<img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/1280px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="Starry Night">
-		<div class = "card-body">
-			<h5 class="card-title">The Starry Night</h5><br>
-			<em>Category:</em> Painting<br>
-			<em>Date:</em> 1889<br>
-			<em>Genes:</em>"Impressionism", "Bright Colors"<br>
-			<em>Partner:</em> A Museum Somewhere<br>
-			<button class = "btn-primary" data-toggle="modal" data-target="#partnerChangeModal">Move Artwork</button>
-			<button class = "btn-secondary" >Delete Artwork</button>
-		</div>
-	</div>
+  {{#each artwork}}
+    <div class = "card" style = "width: 18rem;">
+      <img class="card-img-top" src={{this.thumbnail_url}} alt="Mona Lisa">
+      <div class = "card-body">
+        <h5 class="card-title">{{this.title}}</h5><br>
+        <em>Category:</em> {{this.category}}<br>
+        <em>Date:</em> {{this.date}}<br>
+        <em>Genes:</em>{{this.gene_names_comb}}<br>
+        <em>Partner:</em> {{this.partner_name}}<br>
+        <button class = "btn-primary" data-toggle="modal" data-target="#partnerChangeModal">Move Artwork</button>
+        <button class = "btn-secondary">Delete Artwork</button>
+      </div>
+    </div>
+  {{/each}}
 </div>
 
 
@@ -78,8 +64,9 @@
       <div class="modal-body">
         <input type="text" name="Search for Partner">
         <ul>
-          <li>Partner 1</li>
-          <li>Partner 2</li>
+          {{#each partners}}
+            <li value={{this.name}}>{{this.name}}</li>
+          {{/each}}
         </ul>
         Note: when this website is connected to a backend, this will implement search/filter functionality
       </div>

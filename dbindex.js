@@ -21,11 +21,8 @@ app.get("/", function(req, res){
 	res.render("home.handlebars");
 });
 
-/*app.get("/new_artist", function(req, res){
-	res.render("new_artist.handlebars");
-});*/
-
 app.use("/new_artist", require("./artist.js"));
+app.use("/new_artwork", require("./artwork.js"));
 
 app.get("/new_partner", function(req, res){
 	res.render("new_partner.handlebars");
