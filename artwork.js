@@ -53,7 +53,7 @@ module.exports = function() {
 				FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id \
 				left join gene g on ag.gene_id=g.id \
 				left join partner p on a.partner_id = p.id \
-				left join artist ar on a.artist_id=ar.artist_id) a \
+				left join artist ar on a.artist_id=ar.id) a \
 			GROUP BY title, thumbnail_url, artist_name, date, category, partner_name;", 
 			function(error, results, fields){
 			if (error)
