@@ -79,7 +79,7 @@ module.exports = function() {
 		function complete() {
 			callbackCount++;
 			if (callbackCount>=4)
-				res.render('new_artwork',context)
+				res.render('artwork',context)
 		}
 	});
 

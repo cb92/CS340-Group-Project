@@ -21,23 +21,23 @@ app.get("/", function(req, res){
 	res.render("home.handlebars");
 });
 
-app.use("/new_artist", require("./artist.js"));
-app.use("/new_artwork", require("./artwork.js"));
+app.use("/artist", require("./artist.js"));
+app.use("/artwork", require("./artwork.js"));
 
-app.get("/new_partner", function(req, res){
-	res.render("new_partner.handlebars");
+app.get("/partner", function(req, res){
+	res.render("partner.handlebars");
 });
 
-app.get("/new_gene", function(req, res){
-	res.render("new_gene.handlebars");
+app.get("/gene", function(req, res){
+	res.render("gene.handlebars");
 });
 
-app.get("/new_artwork", function(req, res){
-	res.render("new_artwork.handlebars");
+app.get("/artwork", function(req, res){
+	res.render("artwork.handlebars");
 });
 
-app.get("/new_artistPartner", function(req, res){
-	res.render("new_artistPartner.handlebars");
+app.get("/artistPartner", function(req, res){
+	res.render("artistPartner.handlebars");
 });
 
 app.get("/close-museum", function(req, res){
