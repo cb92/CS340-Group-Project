@@ -6,8 +6,8 @@
 INSERT INTO artist (name, hometown, birthday, deathday, biography)
 VALUES  (:name, :hometown, :birthday, :deathday, :biography);
 
-INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
-VALUES (:title, (SELECT id FROM artist WHERE name = :name and birthday=:birthday), :category, :medium, :date, :thumbnail_url, :partner_id);
+INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)
+VALUES (:title, (SELECT id FROM artist WHERE name = :name and birthday=:birthday), :category, :date, :thumbnail_url, :partner_id);
 
 # NOTE: since an arbitrary number of genes can be selected, this query will be run with every selected gene (each iteratively substituted into the :selected_gene_id_i variable)
 INSERT INTO artwork_gene (artwork_id, gene_id)
@@ -54,8 +54,8 @@ AND artist_id = :aid_to_delete;
 SELECT name from artist;
 SELECT name from partner;
 SELECT name from gene;
-INSERT INTO artwork (title, artist_id, category, medium, date, thumbnail_url, partner_id)
-VALUES (:title, :artist_id, :category, :medium, :date, :thumbnail_url, :partner_id);
+INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)
+VALUES (:title, :artist_id, :category, :date, :thumbnail_url, :partner_id);
 
 # NOTE: since an arbitrary number of genes can be selected, this query will be run with every selected gene (each iteratively substituted into the :selected_gene_id_i variable)
 INSERT INTO artwork_gene (artwork_id, gene_id)

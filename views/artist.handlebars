@@ -9,23 +9,23 @@
     Deathday (Year): <br>
     <input id = "artist_death" type="number" name="deathday"> <br>
     Biography: <br>
-    <textarea id = "artist_bio" rows="4" cols="50" name="comment" form="newArtist"></textarea> <br>
+    <textarea id = "artist_bio" rows="4" cols="50" name="biography" form="newArtist"></textarea> <br>
     <br>
     <br>
     Artwork: <br>
     Title: <br>
-    <input required id = "artwork_title" type="text" name="artist_title"> <br>
+    <input required id = "artwork_title" type="text" name="artwork_title"> <br>
     Category: <br>
-    <input id = "artwork_category" type="text" name="artist_category"> <br>
+    <input id = "artwork_category" type="text" name="artwork_category"> <br>
     Date (Year): <br>
-    <input id = "artwork_date" type="number" name="artist_date"> <br>
+    <input id = "artwork_date" type="number" name="artwork_date"> <br>
     Thumbnail URL: <br>
-    <input id = "artwork_thumbnail" type="url" name="artist_thumbnail"> <br>
+    <input id = "artwork_thumbnail" type="url" name="artwork_thumbnail"> <br>
     Partner: <br>
-    <select id = "artwork_partners" name="artist_partner">
+    <select id = "artwork_partner" name="artwork_partner">
       <option value="null">NONE</option>
       {{#each partners}}
-        <option value={{this.name}}>{{this.name}}</option>
+        <option value={{this.name}} name = {{this.id}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
 
