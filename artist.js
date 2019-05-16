@@ -60,5 +60,11 @@ module.exports = function() {
 		}
 	});
 
+	router.post("/", function(req,res){
+		console.log(req.body);
+		res.redirect('/artist');
+
+	});
+
 	return router;
 }();
