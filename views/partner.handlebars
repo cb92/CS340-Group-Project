@@ -1,5 +1,5 @@
 <h2>Add Partner:</h2>
-<form class="" action="/partner" method="post" id="newPartner">
+<form id="newPartner" action="/partner" method="post" i>
     Name: <br>
     <input type="text" name="name"> <br>
     Type: <br>
@@ -15,18 +15,21 @@
 If a partner is no longer working, please remove them from the list.</br>
 
 <table>
-			<tr>
-        <th>Partner</th>
-        <th>Type</th>
-        <th>Email</th>
-        <th>Region</th>
-        <th>Remove?</th>
-      </tr>
-			<tr>
-        <td>National Gallery of Art, Washington, D.C.</td>
-        <td>Institution</td>
-        <td>support@nga.gov</td>
-        <td>North America</td>
-        <td><button>Delete</button></td>
-      </tr>
-		</table>
+  <thead>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Email</th>
+    <th>Region</th>
+  </thead>
+  <tbody>
+    {{#each partner}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{type}}</td>
+      <td>{{email}}</td>
+      <td>{{region}}</td>
+      <td><button onclick="deletePartner({{id}})">Delete</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

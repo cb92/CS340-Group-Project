@@ -23,10 +23,8 @@ app.get("/", function(req, res){
 
 app.use("/artist", require("./artist.js"));
 app.use("/artwork", require("./artwork.js"));
+app.use("/partner", require("./partner.js"));
 
-app.get("/partner", function(req, res){
-	res.render("partner.handlebars");
-});
 
 app.get("/gene", function(req, res){
 	res.render("gene.handlebars");
@@ -53,7 +51,6 @@ app.get("/creative-difference", function(req, res){
 app.use(function(req, res){
 	res.status(404);
 	res.render('404.handlebars');
-
 });
 
 app.use(function(err, req, res, next){
