@@ -28,5 +28,19 @@ module.exports = function() {
 		}
 	});
 
+  router.post("/", function(req, res){
+    var mysql = req.app.get("mysql");
+    var sql = "INSERT INTO partner (name, type, email, region) VALUES (?, ?, ?, ?)";
+    var inserts = [req.body.name, req.body.type, req.body.email, req.body.region];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+      if (error) {
+        res.write(JSON.stringify(error));
+        res.end;
+      } else {
+        res.redirect('/partner');
+      }
+    });
+  });
+
 	return router;
 }();
