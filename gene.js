@@ -29,16 +29,29 @@ module.exports = function() {
 		});
 	};
 
-  function insertGene(res, mysql, inserts, context)
-  {
 
-  }
+
+// To Remove Test Inserts
+  // function deleteGenes(res, mysql) {
+  //   var sql = "DELETE FROM gene WHERE id > 2";
+  //   sql = mysql.pool.query(sql, function(error, results, fields) {
+  //     if (error) {
+  //       res.write(JSON.stringify(error));
+  //       res.end;
+  //     }
+  //   });
+  //   console.log("deleted");
+  // };
 
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
 
 		var mysql = req.app.get("mysql");
+
+    //REMOVE for testing
+    // deleteGenes(res, mysql);
+
 		getGenes(res, mysql, context, complete);
     getArtworks(res, mysql, context, complete);
 		function complete() {
@@ -46,52 +59,34 @@ module.exports = function() {
 			if (callbackCount == 2)
 				res.render('gene',context);
 		}
+
+
 	});
 
   router.post("/", function(req, res){
     var mysql = req.app.get("mysql");
+    var inserts = [req.body.name, req.body.description];
 
+    var sql = "INSERT INTO gene (name, description) VALUES (?, ?)";
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+      if (error) {
+        res.write(JSON.stringify(error));
+        res.end;
+      } else {
+        sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES (?, (SELECT id FROM gene WHERE name = ?))";
+        inserts = [parseInt(req.body.artworks_to_link), req.body.name];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+          if (error) {
+            res.write(JSON.stringify(error));
+            res.end;
+          } else {
+            res.redirect('/gene');
+          }
+        });
+      }
+    });
 
-
-    // var sql = "INSERT INTO gene (name, description) VALUES (?, ?)";
-    // var inserts = [req.body.name, req.body.description];
-    // sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
-    //   if (error) {
-    //     res.write(JSON.stringify(error));
-    //     res.end;
-    //   }
-    // });
-    //
-    // var idArray = [req.body.name];
-    //
-    // var newId;
-    // mysql.pool.query("SELECT id FROM gene WHERE (name = ?)", idArray, function(error, results, fields){
-		// 	if (error)
-		// 	{
-		// 		res.write(JSON.stringify(error));
-		// 		res.end();
-		// 	}
-    //   JSON.stringify(results);
-    //   newId = results[0].id;
-    //   console.log(newId);
-    // });
-    //
-    //  var newInsert = [req.body.artworks_to_link, newId]
-    //  console.log(newInsert);
-    //
-    //  sql = "INSERT INTO artwork_gene (artist_id, gene_id) VALUES (?, ?)";
-    //
-    //  sql = mysql.pool.query(sql, newInsert, function(error, results, fields) {
-    //    if (error) {
-    //      res.write(JSON.stringify(error));
-    //      res.end;
-    //    } else {
-    //      res.redirect('/partner');
-    //    }
-    // });
    });
-
-
 
   return router;
 }();
