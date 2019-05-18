@@ -73,21 +73,21 @@ module.exports = function() {
     });
   });
 
-  // router.delete("?artistId=:artistId&partnerId=:partnerId", function(req,res) {
-  //     var mysql = req.app.get('mysql');
-  //     var sql = "DELETE FROM artist_partner WHERE artist_id = ? AND partner_id = ?";
-  //     var inserts = [req.params.artistId, req.params.partnerId];
-  //     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
-  //       if (error) {
-  //         res.write(JSON.stringify(error));
-  //         res.status(400);
-  //         res.end();
-  //       } else {
-  //         res.status(202).end();
-  //       }
-  //     })
-  //
-  // })
+  router.delete("/:artistId/:partnerId", function(req,res) {
+      var mysql = req.app.get('mysql');
+      var sql = "DELETE FROM artist_partner WHERE artist_id = ? AND partner_id = ?";
+      var inserts = [req.params.artistId, req.params.partnerId];
+      sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+        if (error) {
+          res.write(JSON.stringify(error));
+          res.status(400);
+          res.end();
+        } else {
+          res.status(202).end();
+        }
+      })
+
+  })
 
 
   return router;
