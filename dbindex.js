@@ -11,7 +11,7 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-//app.use('/static', express.static('public'));
+app.use('/static', express.static('public'));
 app.set('port',process.env.PORT || 3450); // compatible with Heroku deployment
 app.set('mysql',mysql);
 /* End of setup boilerplate */
