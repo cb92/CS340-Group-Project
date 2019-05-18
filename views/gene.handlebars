@@ -1,15 +1,14 @@
 <h2>Add Gene:</h2>
-<form class="" action="/gene" method="post" id="newGene">
+<form id="newGene" action="/gene" method="post" >
     Name: <br>
     <input type="text" name="name"> <br>
     Description: <br>
-    <textarea rows="4" cols="50" name="comment" form="newGene"></textarea> <br>
+    <textarea rows="4" cols="50" name="description" form="newGene"></textarea> <br>
      Artworks in this Gene (Select at least one): <br>
     <select multiple required name="artworks_to_link">
-      <option value="artwork1">artwork1</option>
-      <option value="artwork2">artwork2</option>
-      <option value="artwork3">artwork3</option>
-      <option value="artwork4">artwork4</option>
+      {{#each artworks}}
+      <option value={{id}}>{{title}}</option>
+      {{/each}}
     </select> <br>
     <input type="submit">
 </form>
@@ -17,7 +16,17 @@
 <h2>Genes:</h2>
 
 <table>
-  <tr><th>Gene Name</th><th>Description</th></tr>
-  <tr><td>Pointilism</td><td>A bunch of colored points that make up a picture</td></tr>
-  <tr><td>Impressionism</td><td>a style or movement in painting originating in France in the 1860s, characterized by a concern with depicting the visual impression of the moment, especially in terms of the shifting effect of light and color.</td></tr>
+  <thead>
+    <th>Gene Name</th>
+    <th>Description</th>
+  </thead>
+  <tbody>
+    {{#each genes}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{description}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+
 </table>
