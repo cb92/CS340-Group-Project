@@ -25,15 +25,14 @@ app.use("/artist", require("./artist.js"));
 app.use("/artwork", require("./artwork.js"));
 app.use("/partner", require("./partner.js"));
 app.use("/gene", require("./gene.js"));
+app.use("/artistPartner", require("./artistPartner.js"));
+
 
 
 app.get("/artwork", function(req, res){
 	res.render("artwork.handlebars");
 });
 
-app.get("/artistPartner", function(req, res){
-	res.render("artistPartner.handlebars");
-});
 
 app.get("/close-museum", function(req, res){
 	res.render("close-museum.handlebars");

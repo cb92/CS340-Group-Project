@@ -1,21 +1,18 @@
 <h2>Link Artist/Partner:</h2>
-<form class="" action="/artistPartner" method="post" id="newArtistPartner">
+<form id="newArtistPartner" action="/artistPartner" method="post" >
     Artist: <br>
     <select name="artist">
-      <option value="artist1">artist1</option>
-      <option value="artist2">artist2</option>
-      <option value="artist3">artist3</option>
-      <option value="artist4">artist4</option>
+      {{#each artists}}
+      <option value={{this.id}}>{{this.name}}</option>
+      {{/each}}
     </select> <br>
     Partner: <br>
     <select name="partner">
-      <option value="partner1">partner1</option>
-      <option value="partner2">partner2</option>
-      <option value="partner3">partner3</option>
-      <option value="partner4">partner4</option>
+      {{#each partners}}
+      <option value={{this.id}}>{{this.name}}</option>
+      {{/each}}
     </select> <br>
     <input type="submit">
-
 </form>
 
 
@@ -24,7 +21,17 @@
 Has an artist/partner pair uncovered a creative difference?<br>Select a pair below to break up:<br>
 
 <table>
-			<tr><th>Artist</th><th>Partner</th><th>Breakup?</th></tr>
-			<tr><td>Jackson Pollack</td><td>The Met</td><td><button>Delete</button></td></tr>
-			<tr><td>Vincent Van Gogh</td><td>The Louvre</td><td><button>Delete</button></td></tr>
-		</table>
+  <thead>
+    <th>Artist</th>
+    <th>Partner</th>
+  </thead>
+  <tbody>
+    {{#each artist_partners}}
+    <tr>
+      <td>{{this.artistName}}</td>
+      <td>{{this.partnerName}}</td>
+      <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})">Delete</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
