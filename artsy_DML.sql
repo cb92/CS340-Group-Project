@@ -13,47 +13,47 @@ VALUES (:title, (SELECT id FROM artist WHERE name = :name and birthday=:birthday
 INSERT INTO artwork_gene (artwork_id, gene_id)
 VALUES ((SELECT id FROM artwork where title=:title and artist_id = (SELECT id FROM artist WHERE name = :name and birthday=:birthday) and date = :date), :selected_gene_id_i);
 
-SELECT name FROM gene; -- to populate Gene list in Artwork  
+SELECT name, id FROM gene; -- to populate Gene list in Artwork  
 SELECT * FROM artist; -- to populate Artist table
-SELECT name FROM partner;
+SELECT name, id FROM partner;
 
 ### PARTNER PAGE
 INSERT INTO partner (name, type, email, region)
 VALUES (:name, :type, :email, :region);
 
-SELECT * FROM partner; -- to populate table
+SELECT id, name, type, email, region FROM partner; -- to populate table
 
 DELETE FROM partner
 WHERE id = :id_to_delete;
 
 
 ### GENE PAGE
-INSERT INTO gene (id, name, description)
-VALUES (:id, :name, :description);
+INSERT INTO gene (name, description)
+VALUES (:name, :description);
 
 # NOTE: since an arbitrary number of artworks can be selected for a new gene, this query will be run with every selected artwotk (each iteratively substituted into the :selected_artwork_id_i variable)
 INSERT INTO artwork_gene (artwork_id, gene_id)
 VALUES (:selected_artwork_id_i, (SELECT id FROM gene where name = :name));
 
-SELECT * FROM gene;
-
+SELECT name, description FROM gene;
+SELECT id, title FROM artwork;
 
 ### ARTIST PARTNER PAGE
-SELECT name from artist;
-SELECT name from partner;
+SELECT id, name from artist;
+SELECT name, id from partner;
 INSERT INTO artist_partner (artist_id, partner_id)
 VALUES (:artist_id, :partner_id);
 
-SELECT * from artist_partner;
+SELECT artist_partner.artist_id, artist_partner.partner_id, artist.name AS artistName, partner.name AS partnerName FROM artist_partner INNER JOIN artist ON artist_partner.artist_id = artist.id INNER JOIN partner ON artist_partner.partner_id = partner.id;
 
 DELETE FROM artist_partner
 WHERE partner_id = :pid_to_delete
 AND artist_id = :aid_to_delete;
 
 ### ARTWORK PAGE
-SELECT name from artist;
-SELECT name from partner;
-SELECT name from gene;
+SELECT name, id from artist;
+SELECT name, id from partner;
+SELECT name, id from gene;
 INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)
 VALUES (:title, :artist_id, :category, :date, :thumbnail_url, :partner_id);
 
