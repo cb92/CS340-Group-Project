@@ -37,7 +37,7 @@ module.exports = function() {
     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
       if (error) {
         res.write(JSON.stringify(error));
-        res.end;
+        res.end();
       } else {
         res.redirect('/partner');
       }

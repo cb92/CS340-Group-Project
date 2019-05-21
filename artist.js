@@ -65,25 +65,28 @@ module.exports = function() {
 		var sql = "INSERT INTO artist (name, hometown, birthday, deathday, biography) VALUES  (?, ?, ?, ?, ?);";
 		var inserts = [req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography];
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+			console.log("running query 1");
 			if (error) {
 				res.write(JSON.stringify(error));
-				res.end;
+				res.end();
 			} else
 			{
 				sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, (SELECT id FROM artist WHERE name = ? and birthday=?), ?, ?, ?, ?);";
 				inserts = [req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner];
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+					console.log("running query 2");
 					if(error) {
 						res.write(JSON.stringify(error));
-						res.end;
+						res.end();
 					}
 					else {
 					sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = (SELECT id FROM artist WHERE name = ? and birthday=?) and date = ?), ?);";
 					inserts = [req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_date, parseInt(req.body.genes_to_link)];
 					sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+						console.log("running query 3");
 						if(error) {
 							res.write(JSON.stringify(error));
-							res.end;
+							res.end();
 						}
 						else {
 							res.redirect('/artist');

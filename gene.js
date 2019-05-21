@@ -71,14 +71,14 @@ module.exports = function() {
     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
       if (error) {
         res.write(JSON.stringify(error));
-        res.end;
+        res.end();
       } else {
         sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES (?, (SELECT id FROM gene WHERE name = ?))";
         inserts = [parseInt(req.body.artworks_to_link), req.body.name];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
           if (error) {
             res.write(JSON.stringify(error));
-            res.end;
+            res.end();
           } else {
             res.redirect('/gene');
           }
