@@ -1,31 +1,31 @@
 <h2>Add Artwork:</h2>
 <form class="" action="/artwork" method="post" id="newArtwork">
     Title: <br>
-    <input type="text" name="title"> <br>
+    <input type="text" name="artwork_title"> <br>
     Artist: <br>
     <select name="artist">
       {{#each artists}}
-        <option value={{this.name}}>{{this.name}}</option>
+        <option value={{this.id}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
     Category: <br>
-    <input type="text" name="category"> <br>
+    <input type="text" name="artwork_category"> <br>
     Date (Year): <br>
-    <input type="number" name="date"> <br>
+    <input type="number" name="artwork_date"> <br>
     Thumbnail URL: <br>
-    <input type="url" name="thumbnail"> <br>
-    Partner: <br>
-    <select name="partner">
+    <input type="url" name="artwork_thumbnail"> <br>
+   Partner: <br>
+    <select id = "artwork_partner" name="artwork_partner">
       <option value="null">NONE</option>
       {{#each partners}}
-        <option value={{this.name}}>{{this.name}}</option>
+        <option value={{this.id}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
 
     Gene (Select at least one): <br>
-    <select multiple required name="genes_to_link">
+    <select multiple required id = "artwork_genes" name="genes_to_link">
       {{#each genes}}
-        <option value={{this.name}}>{{this.name}}</option>
+        <option value={{this.id}} >{{this.name}}</option>
       {{/each}}
     </select> <br>
 
