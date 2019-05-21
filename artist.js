@@ -62,38 +62,28 @@ module.exports = function() {
 
 	router.post("/", function(req,res){
 		console.log(req.body);
-
-		/*var sql = "\
+		var mysql = req.app.get('mysql');
+		var sql = "\
 			INSERT INTO artist (name, hometown, birthday, deathday, biography) \
 			VALUES  ((?), (?), (?), (?), (?));\
 			INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)\
-			VALUES ((?), (SELECT id FROM artist WHERE name = (?) and birthday=(?)), (?), (?), (?), (?));
+			VALUES ((?), (SELECT id FROM artist WHERE name = (?) and birthday=(?)), (?), (?), (?), (?));\
 			INSERT INTO artwork_gene (artwork_id, gene_id)\
 			VALUES ((SELECT id FROM artwork where title=(?) and artist_id = \
-			(SELECT id FROM artist WHERE name = (?) and birthday=(?)) and date = (?)), (?));
-
-			";*/
-		res.redirect('/artist');
-
-		/*[req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography, 
-				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,PARTNER ID,
-				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_date, GENE_ID_LIST]*/
-
-
-
-			
-
+			(SELECT id FROM artist WHERE name = (?) and birthday=(?)) and date = (?)), (?));";
+		var inserts = [req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography, 
+				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner,
+				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_date, parseInt(req.body.genes_to_link)];
+		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+			if (error) {
+				res.write(JSON.stringify(error));
+				res.end;
+			} else
+			{
+				res.redirect('/artist');
+			}
+		});			
 	});
-
-
-
-//2019-05-16T04:07:38.891513+00:00 app[web.1]: artist_thumbnail: 'http://www.foo.com',
-//2019-05-16T04:07:38.891515+00:00 app[web.1]: artist_partner: 'The',
-//2019-05-16T04:07:38.891517+00:00 app[web.1]: genes_to_link: 'Pointilism' }
-
-
-
-
 
 
 	return router;
