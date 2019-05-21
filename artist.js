@@ -63,14 +63,9 @@ module.exports = function() {
 	router.post("/", function(req,res){
 		console.log(req.body);
 		var mysql = req.app.get('mysql');
-		var sql = "\
-			INSERT INTO artist (name, hometown, birthday, deathday, biography) \
-			VALUES  ((?), (?), (?), (?), (?));\
-			INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)\
-			VALUES ((?), (SELECT id FROM artist WHERE name = (?) and birthday=(?)), (?), (?), (?), (?));\
-			INSERT INTO artwork_gene (artwork_id, gene_id)\
-			VALUES ((SELECT id FROM artwork where title=(?) and artist_id = \
-			(SELECT id FROM artist WHERE name = (?) and birthday=(?)) and date = (?)), (?));";
+		var sql = "INSERT INTO artist (name, hometown, birthday, deathday, biography) VALUES  ((?), (?), (?), (?), (?));\
+INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES ((?), (SELECT id FROM artist WHERE name = (?) and birthday=(?)), (?), (?), (?), (?));\
+INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=(?) and artist_id = (SELECT id FROM artist WHERE name = (?) and birthday=(?)) and date = (?)), (?));";
 		var inserts = [req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography, 
 				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner,
 				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_date, parseInt(req.body.genes_to_link)];
