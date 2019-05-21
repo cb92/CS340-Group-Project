@@ -73,6 +73,10 @@ module.exports = function() {
 			{
 				sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, (SELECT id FROM artist WHERE name = ? and birthday=?), ?, ?, ?, ?);";
 				inserts = [req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner];
+				if (req.body.artwork_partner=="null")
+				{
+					inserts[5] = null;
+				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					console.log("running query 2");
 					if(error) {
