@@ -102,8 +102,21 @@ module.exports = function() {
 				res.end();
 			}
 			else {
-				sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?);";
-				inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_date, parseInt(req.body.genes_to_link)];
+				sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?)";
+				if (typeof req.body.genes_to_link != "object")
+				{
+					sql+=";";
+					inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_date, req.body.genes_to_link];
+				}
+				else {
+					inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_date, req.body.genes_to_link[0]];
+					for (let i=1; i<req.body.genes_to_link.length; i++)
+					{
+						sql+=", ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?)";
+						inserts.push(req.body.artwork_title, req.body.artist_id, req.body.artwork_date, req.body.genes_to_link[i]);
+					}
+					sql+=";";
+				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					console.log("running query 2");
 					if(error) {
