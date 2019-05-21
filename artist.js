@@ -5,7 +5,7 @@ module.exports = function() {
 
 	function getGenes(res, mysql, context, complete)
 	{
-		mysql.pool.query("SELECT name FROM gene", function(error, results, fields){
+		mysql.pool.query("SELECT name, id FROM gene", function(error, results, fields){
 			if (error)
 			{
 				res.write(JSON.stringify(error));
@@ -67,17 +67,21 @@ module.exports = function() {
 			INSERT INTO artist (name, hometown, birthday, deathday, biography) \
 			VALUES  ((?), (?), (?), (?), (?));\
 			INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)\
-			VALUES ((?), (SELECT id FROM artist WHERE name = (?) and birthday=(?)), :category, :date, :thumbnail_url, :partner_id);";*/
+			VALUES ((?), (SELECT id FROM artist WHERE name = (?) and birthday=(?)), (?), (?), (?), (?));
+			INSERT INTO artwork_gene (artwork_id, gene_id)\
+			VALUES ((SELECT id FROM artwork where title=(?) and artist_id = \
+			(SELECT id FROM artist WHERE name = (?) and birthday=(?)) and date = (?)), (?));
+
+			";*/
 		res.redirect('/artist');
 
 		/*[req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography, 
-				req.body.artist_title, req.body.name, req.body.birthday, req.body.artist_category, req.body.artist_date, req.body.artist_thumbnail]*/
+				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,PARTNER ID,
+				req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_date, GENE_ID_LIST]*/
 
 
 
-			//	INSERT INTO artwork_gene (artwork_id, gene_id)\
-			//VALUES ((SELECT id FROM artwork where title=:title and artist_id = \
-			//	(SELECT id FROM artist WHERE name = :name and birthday=:birthday) and date = :date), :selected_gene_id_i);
+			
 
 	});
 
