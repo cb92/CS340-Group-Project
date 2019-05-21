@@ -73,8 +73,23 @@ module.exports = function() {
         res.write(JSON.stringify(error));
         res.end();
       } else {
+
         sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES (?, (SELECT id FROM gene WHERE name = ?))";
-        inserts = [parseInt(req.body.artworks_to_link), req.body.name];
+        if (typeof req.body.artworks_to_link != "object")
+        {
+          sql+=";";
+          inserts = [req.body.artworks_to_link, req.body.name];
+        }
+        else {
+          inserts = [req.body.artworks_to_link[0], req.body.name];
+          for (let i=1; i<req.body.artworks_to_link.length; i++)
+          {
+            sql+=", (?, (SELECT id FROM gene WHERE name = ?))";
+            inserts.push(req.body.artworks_to_link[i], req.body.name);
+          }
+          sql+=";";
+        }
+
         sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
           if (error) {
             res.write(JSON.stringify(error));
