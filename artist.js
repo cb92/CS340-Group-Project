@@ -75,7 +75,7 @@ module.exports = function() {
 				inserts = [req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner];
 				if (req.body.artwork_partner=="null")
 				{
-					inserts[5] = null;
+					inserts[6] = null;
 				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					console.log("running query 2");
