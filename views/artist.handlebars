@@ -25,14 +25,14 @@
     <select id = "artwork_partner" name="artwork_partner">
       <option value="null">NONE</option>
       {{#each partners}}
-        <option value={{this.name}} name = {{this.id}}>{{this.name}}</option>
+        <option value={{this.id}} name = {{this.name}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
 
     Gene (Select at least one): <br>
     <select multiple required id = "artwork_genes" name="genes_to_link">
       {{#each genes}}
-        <option value={{this.name}}>{{this.name}}</option>
+        <option value={{this.id}} name = {{this.name}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
 
