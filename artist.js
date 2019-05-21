@@ -95,7 +95,7 @@ module.exports = function() {
 							for (let i=1; i<req.body.genes_to_link.length; i++)
 							{
 								sql+=", ((SELECT id FROM artwork where title=? and artist_id = (SELECT id FROM artist WHERE name = ? and birthday=?) and date = ?), ?)";
-								inserts.push(req.body.artwork_title, req.body.artist_id, req.body.artwork_date, req.body.genes_to_link[i]);
+								inserts.push(req.body.artwork_title, req.body.name, req.body.birthday, req.body.artwork_date, req.body.genes_to_link[i]);
 							}
 							sql+=";";
 						}
