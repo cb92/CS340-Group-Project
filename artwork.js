@@ -104,7 +104,7 @@ module.exports = function() {
 					res.end;
 				}
 				else {
-					res.redirect('/artist');
+					res.redirect('/artwork');
 				}
 			});
 			}
