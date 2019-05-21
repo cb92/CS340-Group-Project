@@ -61,7 +61,6 @@ module.exports = function() {
 	});
 
 	router.post("/", function(req,res){
-		console.log(req.body);
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO artist (name, hometown, birthday, deathday, biography) VALUES  (?, ?, ?, ?, ?);";
 		var inserts = [req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography];

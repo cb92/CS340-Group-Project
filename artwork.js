@@ -87,6 +87,7 @@ module.exports = function() {
 
 
 	router.post("/", function(req,res){
+		console.log(req.body);
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, ?, ?, ?, ?, ?);";
 		var inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner];
@@ -96,17 +97,17 @@ module.exports = function() {
 				res.end;
 			}
 			else {
-			sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?);";
-			inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_date, parseInt(req.body.genes_to_link)];
-			sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-				if(error) {
-					res.write(JSON.stringify(error));
-					res.end;
-				}
-				else {
-					res.redirect('/artwork');
-				}
-			});
+				sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?);";
+				inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_date, parseInt(req.body.genes_to_link)];
+				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+					if(error) {
+						res.write(JSON.stringify(error));
+						res.end;
+					}
+					else {
+						res.redirect('/artwork');
+					}
+				});
 			}
 		});			
 	});
