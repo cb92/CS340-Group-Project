@@ -68,7 +68,7 @@ UPDATE artwork SET partner_id = :pid_selected
 WHERE id = :aid_to_move;
 
 # Display Artwork SELECT query
-SELECT id, title, thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM (
+SELECT concat('partnerChangeModal', id) as modal_id, concat('#partnerChangeModal', id) as modal_id_target, title, thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM (
 	SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name
 	FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id 
 	left join gene g on ag.gene_id=g.id

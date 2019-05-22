@@ -44,11 +44,11 @@
         <em>Date:</em> {{this.date}}<br>
         <em>Genes:</em>{{this.gene_names_comb}}<br>
         <em>Partner:</em> {{this.partner_name}}<br>
-        <button class = "btn-primary" data-toggle="modal" data-target=(concat '#partnerChangeModal' {{this.id}})>Move Artwork</button>
+        <button class = "btn-primary" data-toggle="modal" data-target={{this.modal_id_target}}>Move Artwork</button>
       </div>
     </div>
 
-  <div class="modal fade" id=(concat 'partnerChangeModal' {{this.id}}) tabindex="-1" role="dialog" aria-labelledby="partnerModalTitle" aria-hidden="true">
+  <div class="modal fade" id={{this.modal_id}} tabindex="-1" role="dialog" aria-labelledby="partnerModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
