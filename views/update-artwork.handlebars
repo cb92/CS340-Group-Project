@@ -1,9 +1,26 @@
-<h2>Update Artwork:</h2>
+<h2>Move Artwork:</h2>
+
+<div class = "card" style = "width: 18rem;">
+  <img class="card-img-top" src={{artworkToUpdate.thumbnail_url}}>
+  <div class = "card-body">
+    <h5 class="card-title">{{artworkToUpdate.title}}</h5><br>
+    <em>Artist:</em> {{artworkToUpdate.artist_name}}<br>
+    <em>Category:</em> {{artworkToUpdate.category}}<br>
+    <em>Date:</em> {{artworkToUpdate.date}}<br>
+    <em>Genes:</em>{{artworkToUpdate.gene_names_comb}}<br>
+    <em>Partner:</em> {{artworkToUpdate.partner_name}}<br>
+  </div>
+</div>
 
 
-
-<ul>
-{{#each partners}}
-<li>{{this.name}}</li>
-{{/each}}
-</ul>
+Which partner would you like to move this artwork to?<br>
+<form>
+	<input type="text" name="search-string">
+	<ul>
+	{{#each partners}}
+	<li>{{this.name}}</li>
+	{{/each}}
+	</ul>
+	<button type="submit">Change Partner</button>
+</form>
+	

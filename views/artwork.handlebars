@@ -36,7 +36,7 @@
 <div class="card-columns">
   {{#each artwork}}
     <div class = "card" style = "width: 18rem;">
-      <img class="card-img-top" src={{this.thumbnail_url}} alt="Mona Lisa">
+      <img class="card-img-top" src={{this.thumbnail_url}}>
       <div class = "card-body">
         <h5 class="card-title">{{this.title}}</h5><br>
         <em>Artist:</em> {{this.artist_name}}<br>
@@ -44,7 +44,7 @@
         <em>Date:</em> {{this.date}}<br>
         <em>Genes:</em>{{this.gene_names_comb}}<br>
         <em>Partner:</em> {{this.partner_name}}<br>
-        <a class="btn btn=primary" href="/artwork/{{this.id}}">Update Artwork</a>
+        <a class="btn btn-primary" href="/artwork/{{this.id}}">Update Artwork</a>
       </div>
     </div>
   {{/each}}
