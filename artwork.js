@@ -149,7 +149,7 @@ module.exports = function() {
 	});
 
 
-	router.get("/:id", function(rew, res){
+	router.get("/:id", function(req, res){
 		var callbackCount = 0;
 		var context = {};
 		var mysql = req.app.get("mysql");
