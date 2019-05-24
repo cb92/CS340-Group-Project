@@ -43,7 +43,7 @@ module.exports = function() {
 				res.write(JSON.stringify(error));
 				res.end();
 			}
-			context.artworkToUpdate = results;
+			context.artworkToUpdate = results[0];
 			complete();
 		});
 	};
