@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 var pool = mysql.createPool({
   connectionLimit : 10,
-  host            : 'ui0tj7jn8pyv9lp6.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-  user            : 'r2eqnhjr3uqvbeuj',
-  password        : 'rjjrehyjvgpv5eo4',
-  database        : 'wbwne5wnn9uczgyr'
+  host            : ENV['JAWS_HOST_VAL'],
+  user            : ENV['JAWS_USER_VAL'],
+  password        : ENV['JAWS_PW_VAL'],
+  database        : ENV['JAWS_DB_VAL']
 });
 module.exports.pool = pool;
