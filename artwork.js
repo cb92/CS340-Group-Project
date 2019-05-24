@@ -30,6 +30,24 @@ module.exports = function() {
 		});
 	};
 
+	function getOneArtwork(res, mysql, context, complete, id)
+	{
+		var sql = "SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, p.name as partner_name\
+			FROM artwork a \
+			left join artist ar on a.artist_id=ar.id \
+			left join partner p on a.partner_id = p.id \
+			where a.id=?; ";
+		mysql.pool.query(sql, id, function(error, results, fields){
+			if (error)
+			{
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			context.artworkToUpdate = results;
+			complete();
+		});
+	};
+
 	function getPartners(res, mysql, context, complete)
 	{
 		mysql.pool.query("SELECT name, id FROM partner", function(error, results, fields){
@@ -40,7 +58,6 @@ module.exports = function() {
 			}
 			context.partners = results;
 			complete();
-
 		});
 	};
 
@@ -48,7 +65,7 @@ module.exports = function() {
 	function getArtwork(res, mysql, context, complete)
 	{
 		mysql.pool.query(
-			"SELECT concat('partnerChangeModal', id) as modal_id, concat('#partnerChangeModal', id) as modal_id_target, title, thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM ( \
+			"SELECT id, title, thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM ( \
 				SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name \
 				FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id \
 				left join gene g on ag.gene_id=g.id \
@@ -129,6 +146,20 @@ module.exports = function() {
 				});
 			}
 		});			
+	});
+
+
+	router.get("/:id", function(rew, res){
+		var callbackCount = 0;
+		var context = {};
+		var mysql = req.app.get("mysql");
+		getOneArtwork(res, mysql, context, complete, req.params.id);
+		getPartners(res, mysql, context, complete);
+		function complete() {
+			callbackCount++;
+			if (callbackCount>=2)
+				res.render('update-artwork',context);
+		}
 	});
 
 	return router;
