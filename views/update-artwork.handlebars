@@ -15,10 +15,10 @@
 
 Which partner would you like to move this artwork to?<br>
 <form>
-	<input type="text" name="search-string">
+	<input type="text" id="partner-search-string" onkeyup="filterValues()">
 	<ul>
 	{{#each partners}}
-	<li>{{this.name}}</li>
+	<li class="partner-li">{{this.name}}</li>
 	{{/each}}
 	</ul>
 	<button type="submit">Change Partner</button>

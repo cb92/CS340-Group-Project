@@ -155,6 +155,7 @@ module.exports = function() {
 		var mysql = req.app.get("mysql");
 		getOneArtwork(res, mysql, context, complete, req.params.id);
 		getPartners(res, mysql, context, complete);
+		context.jsscripts = ["filter.js"];
 		function complete() {
 			callbackCount++;
 			if (callbackCount>=2)
