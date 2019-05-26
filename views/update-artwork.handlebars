@@ -15,11 +15,11 @@
 
 Which partner would you like to move this artwork to?<br>
 <form>
-	<input type="text" id="partner-search-string" onkeyup="filterValues()">
+	<input type="text" id="partner-search-string">
 	<!--select id="new_partner" name="new_partner"-->
-		<input type="radio" name="partner-choices" class="partner-li" value="null">NONE</option>
+		<input type="radio" name="partner-choices" class="partner-li" value="null">NONE<br>
 		{{#each partners}}
-		<input type="radio" name="partner-choices" class="partner-li" value={{this.id}}>{{this.name}}</option>
+		<input type="radio" name="partner-choices" class="partner-li" value={{this.id}}>{{this.name}}<br>
 		{{/each}}
 	<!--/select-->
 	<button type="submit">Change Partner</button>

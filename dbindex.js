@@ -28,21 +28,6 @@ app.use("/gene", require("./gene.js"));
 app.use("/artistPartner", require("./artistPartner.js"));
 
 
-
-app.get("/artwork", function(req, res){
-	res.render("artwork.handlebars");
-});
-
-
-app.get("/close-museum", function(req, res){
-	res.render("close-museum.handlebars");
-});
-
-app.get("/creative-difference", function(req, res){
-	res.render("creative-difference.handlebars");
-});
-
-
 /* Error handling boilerplate*/
 app.use(function(req, res){
 	res.status(404);

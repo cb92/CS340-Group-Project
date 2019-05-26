@@ -155,12 +155,31 @@ module.exports = function() {
 		var mysql = req.app.get("mysql");
 		getOneArtwork(res, mysql, context, complete, req.params.id);
 		getPartners(res, mysql, context, complete);
-		context.jsscripts = ["filter.js"];
+		context.jsscripts = ["filter.js", "update.js"];
 		function complete() {
 			callbackCount++;
 			if (callbackCount>=2)
 				res.render('update-artwork',context);
 		}
+	});
+
+
+	router.put("/:id", function(req, res){
+		var mysql = req.app.get("mysql");
+		var sql = "UPDATE artwork SET partner_id = ? WHERE id = ?;"
+		var inserts = [req.body.new_partner, req.params.id]
+		if (inserts[0]=="null")
+			inserts[0]=null;
+		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+			if(error) {
+				res.write(JSON.stringify(error));
+				res.end();
+			}
+			else {
+				res.status(200);
+				res.end();
+			}
+		});
 	});
 
 	return router;
