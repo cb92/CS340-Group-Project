@@ -1,11 +1,8 @@
 function filterValues()
 {
 	var searchEl = document.getElementById("partner-search-string");
-	console.log(searchEl);
 	var searchVal = searchEl.value.toUpperCase();
-	console.log(searchVal);
 	var partners = document.body.querySelectorAll(".partner-li");
-	console.log(partners);
 
 	for (let i=0; i<partners.length; i++)
 	{
@@ -15,7 +12,7 @@ function filterValues()
 		} else 
 		{
 			partners[i].style.display = "none";
-			console.log(searchVal+" not in "+partners[i].innerText+"\n");
+			console.log(partners[i].innerText);
 		}
 	}
 }
