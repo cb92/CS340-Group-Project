@@ -2,20 +2,20 @@ function filterValues()
 {
 	var searchEl = document.getElementById("partner-search-string");
 	console.log(searchEl);
-	var searchVal = searchEl.value;
+	var searchVal = searchEl.value.toUpperCase();
 	console.log(searchVal);
-	var partnerLis = document.body.querySelectorAll(".partner-li");
-	console.log(partnerLis);
+	var partners = document.body.querySelectorAll(".partner-li");
+	console.log(partners);
 
-	for (let i=0; i<partnerLis.length; i++)
+	for (let i=0; i<partners.length; i++)
 	{
-		if (partnerLis[i].innerText.indexOf(searchVal)==-1){
-			partnerLis[i].style.display = "none";
-			console.log(searchVal+" not in "+partnerLis[i].innerText+"\n");
+		if (partners[i].innerText.toUpperCase().indexOf(searchVal)> -1 || searchVal.length==0){
+			partners[i].style.display = "block";
 
 		} else 
 		{
-			partnerLis[i].style.display = "block";
+			partners[i].style.display = "none";
+			console.log(searchVal+" not in "+partners[i].innerText+"\n");
 		}
 	}
 }
