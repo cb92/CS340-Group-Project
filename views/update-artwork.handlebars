@@ -14,14 +14,14 @@
 
 
 Which partner would you like to move this artwork to?<br>
-<form>
+<form id = "move-artwork" action="/artwork" method="post">
 	<input type="text" id="partner-search-string">
-	<!--select id="new_partner" name="new_partner"-->
-		<input type="radio" name="partner-choices" class="partner-li" value="null">NONE<br>
+	<select id="new_partner" name="new_partner">
+		<option class="partner-li" value="null">NONE</option>
 		{{#each partners}}
-		<input type="radio" name="partner-choices" class="partner-li" value={{this.id}}>{{this.name}}<br>
+		<option class="partner-li" value={{this.id}}>{{this.name}}</option>
 		{{/each}}
-	<!--/select-->
-	<button type="submit">Change Partner</button>
+	</select>
+	<button onclick="updateArtwork({{this.artworkToUpdate.id}})">Change Partner</button>
 </form>
 	
