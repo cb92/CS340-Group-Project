@@ -1,6 +1,8 @@
 <h2>Add Artist:</h2>
+<p>All neccessary fields are marked with an asterisk.</p>
+<p>New artists must also be registered with a new artwork (artists cannot be registered with no artwork).</p>
 <form class="" action="/artist" method="post" id="newArtist">
-    Name: <br>
+    *Name: <br>
     <input required id = "artist_name" type="text" name="name"> <br>
     Hometown: <br>
     <input id = "artist_hometown" type="text" name="hometown"> <br>
@@ -13,7 +15,7 @@
     <br>
     <br>
     Artwork: <br>
-    Title: <br>
+    *Title: <br>
     <input required id = "artwork_title" type="text" name="artwork_title"> <br>
     Category: <br>
     <input id = "artwork_category" type="text" name="artwork_category"> <br>
@@ -40,7 +42,7 @@
 </form>
 
 <br>
-<h2>Artists:</h2> 
+<h2>Artists:</h2>
 <table>
   <tr>
     <th>Artist</th>

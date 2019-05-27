@@ -1,8 +1,10 @@
 <h2>Add Artwork:</h2>
+<p>All neccessary fields are marked with an asterisk.</p>
+<p>To select multiple genes, select while pressing command/control.</p>
 <form class="" action="/artwork" method="post" id="newArtwork">
-    Title: <br>
+    *Title: <br>
     <input type="text" name="artwork_title"> <br>
-    Artist: <br>
+    *Artist: <br>
     <select name="artist_id">
       {{#each artists}}
         <option value={{this.id}}>{{this.name}}</option>
@@ -49,8 +51,3 @@
     </div>
   {{/each}}
 </div>
-
-
-
-  
-
