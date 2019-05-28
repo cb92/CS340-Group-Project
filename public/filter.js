@@ -1,19 +1,21 @@
 function filterValues()
 {
 	var searchEl = document.getElementById("partner-search-string");
-	console.log(searchEl);
-	var searchVal = searchEl.value;
-	console.log(searchVal);
-	var partnerLis = document.body.querySelectorAll(".partner-li");
-	console.log(partnerLis);
+	var searchVal = searchEl.value.toUpperCase();
+	var partners = document.body.querySelectorAll(".partner-li");
 
-	for (let i=0; i<partnerLis.length; i++)
+	for (let i=0; i<partners.length; i++)
 	{
-		if (partnerLis[i].innerText.indexOf(searchVal)==-1){
-			partnerLis[i].style.display = "none";
+		if (partners[i].innerText.toUpperCase().indexOf(searchVal)> -1 || searchVal.length==0){
+			//partners[i].style.display = "block";
+			console.log("match:");
+			console.log(partners[i].innerText);
+
 		} else 
 		{
-			partnerLis[i].style.display = " ";
+			//partners[i].style.display = "none";
+			console.log("no match:");
+			console.log(partners[i].innerText);
 		}
 	}
 }

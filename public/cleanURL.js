@@ -3,7 +3,7 @@ function cleanPhotoURL(photoURL)
 	if (photoURL)
 	{
 		var http = new XMLHttpRequest();
-	    http.open('HEAD', image_url, false);
+	    http.open('HEAD', photoURL, false);
 	    http.send();
 	    if (http.status <400)
 	    	return photoURL;
