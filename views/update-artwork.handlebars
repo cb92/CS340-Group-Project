@@ -1,7 +1,7 @@
 <h2>Move Artwork:</h2>
 
 <div class = "card" style = "width: 18rem;">
-  <img class="card-img-top" src= {{this.thumbnail_url}} onload="this.onload=null; this.src=cleanPhotoURL({{thumbnail_url}});">
+  <img class="card-img-top" src= {{this.thumbnail_url}} onload="this.onload=null; this.src=cleanPhotoURL({{thumbnail_url}});" />
   <div class = "card-body">
     <h5 class="card-title">{{this.artworkToUpdate.title}}</h5><br>
     <em>Artist:</em> {{this.artworkToUpdate.artist_name}}<br>
