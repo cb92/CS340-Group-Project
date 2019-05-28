@@ -7,11 +7,14 @@ function filterValues()
 	for (let i=0; i<partners.length; i++)
 	{
 		if (partners[i].innerText.toUpperCase().indexOf(searchVal)> -1 || searchVal.length==0){
-			partners[i].style.display = "block";
+			//partners[i].style.display = "block";
+			console.log("match:");
+			console.log(partners[i].innerText);
 
 		} else 
 		{
-			partners[i].style.display = "none";
+			//partners[i].style.display = "none";
+			console.log("no match:");
 			console.log(partners[i].innerText);
 		}
 	}

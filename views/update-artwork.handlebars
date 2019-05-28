@@ -1,7 +1,7 @@
 <h2>Move Artwork:</h2>
 
 <div class = "card" style = "width: 18rem;">
-  <img class="card-img-top" src= "{{this.thumbnail_url}}" onload="this.onload=null; this.src=cleanPhotoURL(\"{{thumbnail_url}}\");" />
+  <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' />
   <div class = "card-body">
     <h5 class="card-title">{{this.artworkToUpdate.title}}</h5><br>
     <em>Artist:</em> {{this.artworkToUpdate.artist_name}}<br>
@@ -15,7 +15,7 @@
 
 Which partner would you like to move this artwork to?<br>
 <form id = "move-artwork" action="/artwork" method="post">
-	<input type="text" id="partner-search-string">
+	<input type="text" id="partner-search-string" onkeyup="filterValues()">
 	<select id="new_partner" name="new_partner">
 		<option class="partner-li" value="null">NONE</option>
 		{{#each partners}}
