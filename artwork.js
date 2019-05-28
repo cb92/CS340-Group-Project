@@ -32,7 +32,7 @@ module.exports = function() {
 
 	function getOneArtwork(res, mysql, context, complete, id)
 	{
-		var sql = "SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, p.name as partner_name\
+		var sql = "SELECT a.id, a.title, ar.name as artist_name, case when a.thumbnail_url is null then 'null' else a.thumbnail_url end as thumbnail_url, a.date, a.category, p.name as partner_name\
 			FROM artwork a \
 			left join artist ar on a.artist_id=ar.id \
 			left join partner p on a.partner_id = p.id \
@@ -65,7 +65,7 @@ module.exports = function() {
 	function getArtwork(res, mysql, context, complete)
 	{
 		mysql.pool.query(
-			"SELECT id, title, thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM ( \
+			"SELECT id, title, case when thumbnail_url is null then 'null' else thumbnail_url end as thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM ( \
 				SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name \
 				FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id \
 				left join gene g on ag.gene_id=g.id \
