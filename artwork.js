@@ -88,6 +88,7 @@ module.exports = function() {
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
+		context.jsscripts = ["cleanURL.js"];
 		var mysql = req.app.get("mysql");
 		getArtists(res, mysql, context, complete);
 		getPartners(res, mysql, context, complete);
@@ -155,7 +156,7 @@ module.exports = function() {
 		var mysql = req.app.get("mysql");
 		getOneArtwork(res, mysql, context, complete, req.params.id);
 		getPartners(res, mysql, context, complete);
-		context.jsscripts = ["filter.js", "update.js"];
+		context.jsscripts = ["filter.js", "update.js", "cleanURL.js"];
 		function complete() {
 			callbackCount++;
 			if (callbackCount>=2)
