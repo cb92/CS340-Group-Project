@@ -17,9 +17,9 @@ Which partner would you like to move this artwork to?<br>
 <form id = "move-artwork" action="/artwork" method="post">
 	<input list="new_partner" type="text" id="partner-search-string"> <!-- onkeyup="filterValues()"-->
 	<datalist id="new_partner" name="new_partner">
-		<option class="partner-li" value="null"/>
+		<option class="partner-li" value="null">None</option>
 		{{#each partners}}
-		<option class="partner-li" value="{{this.id}}"/>
+		<option class="partner-li" value="{{this.id}}">{{this.name}}</option>
 		{{/each}}
 	</datalist>
 	<button onclick="updateArtwork({{this.artworkToUpdate.id}})">Change Partner</button>
