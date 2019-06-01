@@ -25,11 +25,17 @@
     </select> <br>
 
     Gene (Select at least one): <br>
+    <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')"><br>
     <select multiple required id = "artwork_genes" name="genes_to_link">
       {{#each genes}}
-        <option value={{this.id}} >{{this.name}}</option>
+        <option class = "gene_options" value={{this.id}} >{{this.name}}</option>
       {{/each}}
     </select> <br>
+
+
+  
+
+
 
     <input type="submit">
 </form>
