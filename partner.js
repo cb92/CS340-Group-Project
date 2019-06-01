@@ -19,7 +19,7 @@ module.exports = function() {
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
-    context.jsscripts = ["deletepartner.js"];
+    context.jsscripts = ["deletepartner.js","filter.js"];
 
 		var mysql = req.app.get("mysql");
 		getPartners(res, mysql, context, complete);

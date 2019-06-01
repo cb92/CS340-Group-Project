@@ -46,7 +46,7 @@ module.exports = function() {
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
-
+    context.jsscripts=["filter.js"];
 		var mysql = req.app.get("mysql");
 
     //REMOVE for testing

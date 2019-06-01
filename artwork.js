@@ -88,7 +88,7 @@ module.exports = function() {
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
-		context.jsscripts = ["cleanURL.js"];
+		context.jsscripts = ["cleanURL.js", "filter.js"];
 		var mysql = req.app.get("mysql");
 		getArtists(res, mysql, context, complete);
 		getPartners(res, mysql, context, complete);
