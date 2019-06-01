@@ -1,21 +1,21 @@
-function filterValues()
+function filterValues(s_name, elQueryString)
 {
-	var searchEl = document.getElementById("partner-search-string");
+	var searchEl = document.getElementById(s_name);
 	var searchVal = searchEl.value.toUpperCase();
-	var partners = document.body.querySelectorAll(".partner-li");
+	var toSearch = document.body.querySelectorAll(elQueryString);
 
-	for (let i=0; i<partners.length; i++)
+	for (let i=0; i<toSearch.length; i++)
 	{
-		if (partners[i].innerText.toUpperCase().indexOf(searchVal)> -1 || searchVal.length==0){
-			partners[i].style.display = "block";
-			console.log("match:");
-			console.log(partners[i].innerText);
+		if (toSearch[i].innerText.toUpperCase().indexOf(searchVal)> -1 || searchVal.length==0){
+			toSearch[i].style.display = "block";
+			//console.log("match:");
+			//console.log(toSearch[i].innerText);
 
 		} else 
 		{
-			partners[i].style.display = "none";
-			console.log("no match:");
-			console.log(partners[i].innerText);
+			toSearch[i].style.display = "none";
+			//console.log("no match:");
+			//console.log(toSearch[i].innerText);
 		}
 	}
 }
