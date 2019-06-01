@@ -1,39 +1,41 @@
-<h2>Add Gene:</h2>
-<p>Genes are a descriptive category of works of art (ie. Pop Art, Bright Colors).</p>
-<p>All neccessary fields are marked with an asterisk. Name must be unique.</p>
-<form id="newGene" action="/gene" method="post" >
-    *Name: <br>
-    <input required type="text" name="name"> <br>
-    Description: <br>
-    <textarea rows="4" cols="50" name="description" form="newGene"></textarea> <br>
-     *Artworks in this Gene (Select at least one): <br>
-     <input type="text" id="artwork_search_string" onkeyup="filterValues('artwork_search_string','.artwork_options')" placeholder="Search for Artwork..."><br>
-    <select multiple required id="artwork_options" name="artworks_to_link">
-      {{#each artworks}}
-      <option class="artwork_options" value={{id}}>{{title}}</option>
-      {{/each}}
-    </select> <br>
+  <div class = "container">
+  <h2>Add Gene:</h2>
+  <p>Genes are a descriptive category of works of art (ie. Pop Art, Bright Colors).</p>
+  <p>All neccessary fields are marked with an asterisk. Name must be unique.</p>
+  <form id="newGene" action="/gene" method="post" >
+      *Name: <br>
+      <input required type="text" name="name"> <br>
+      Description: <br>
+      <textarea rows="4" cols="50" name="description" form="newGene"></textarea> <br>
+       *Artworks in this Gene (Select at least one): <br>
+       <input type="text" id="artwork_search_string" onkeyup="filterValues('artwork_search_string','.artwork_options')" placeholder="Search for Artwork..."><br>
+      <select multiple required id="artwork_options" name="artworks_to_link">
+        {{#each artworks}}
+        <option class="artwork_options" value={{id}}>{{title}}</option>
+        {{/each}}
+      </select> <br>
 
 
 
 
-    <input type="submit">
-</form>
+      <input type="submit">
+  </form>
 
-<h2>Genes:</h2>
-<div class="table-responsive">
-  <table class="table thead-dark">
-    <thead>
-      <th>Gene Name</th>
-      <th>Description</th>
-    </thead>
-    <tbody>
-      {{#each genes}}
-      <tr>
-        <td>{{name}}</td>
-        <td>{{description}}</td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  <h2>Genes:</h2>
+  <div class="table-responsive">
+    <table class="table thead-dark">
+      <thead>
+        <th>Gene Name</th>
+        <th>Description</th>
+      </thead>
+      <tbody>
+        {{#each genes}}
+        <tr>
+          <td>{{name}}</td>
+          <td>{{description}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>

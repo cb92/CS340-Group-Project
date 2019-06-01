@@ -1,3 +1,8 @@
+body
+{
+    font-family: 'Quicksand', sans-serif;
+}
+
 .card-columns
  {
  	margin:50px;
@@ -9,25 +14,13 @@
     }
 }
 
-@media (min-width: 576px) {
-    .card-columns {
-        column-count: 2;
-    }
-}
-
-@media (min-width: 768px) {
+@media (min-width: 826px) {
     .card-columns {
         column-count: 3;
     }
 }
 
-@media (min-width: 992px) {
-    .card-columns {
-        column-count: 4;
-    }
-}
-
-@media (min-width: 1200px) {
+@media (min-width: 1076px) {
     .card-columns {
         column-count: 4;
     }

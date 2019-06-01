@@ -1,57 +1,59 @@
-<h2>Add Artwork:</h2>
-<p>All neccessary fields are marked with an asterisk.</p>
-<p>To select multiple genes, select while pressing command/control. Note that Artist+Title+Date must be unique.</p>
-<form class="" action="/artwork" method="post" id="newArtwork">
-    *Title: <br>
-    <input required type="text" name="artwork_title"> <br>
-    *Artist: <br>
-    <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist_options')"><br-->
-    <select required id="artwork_artist" name="artist_id">
-      {{#each artists}}
-        <option class="artist_options" value={{this.id}}>{{this.name}}</option>
-      {{/each}}
-    </select> <br>
+<div class = "container">
+  <h2>Add Artwork:</h2>
+  <p>All neccessary fields are marked with an asterisk.</p>
+  <p>To select multiple genes, select while pressing command/control. Note that Artist+Title+Date must be unique.</p>
+  <form class="" action="/artwork" method="post" id="newArtwork">
+      *Title: <br>
+      <input required type="text" name="artwork_title"> <br>
+      *Artist: <br>
+      <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist_options')"><br-->
+      <select required id="artwork_artist" name="artist_id">
+        {{#each artists}}
+          <option class="artist_options" value={{this.id}}>{{this.name}}</option>
+        {{/each}}
+      </select> <br>
 
-    Category: <br>
-    <input type="text" name="artwork_category"> <br>
-    Date (Year): <br>
-    <input type="number" name="artwork_date"> <br>
-    Thumbnail URL: <br>
-    <input type="url" name="artwork_thumbnail"> <br>
-   Partner: <br>
-   <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
-    <select id="new_partner" name="artwork_partner">
-      <option class="partner-options" value="null">None</option>
-      {{#each partners}}
-      <option class="partner-options" value="{{this.id}}">{{this.name}}</option>
-      {{/each}}
-    </select> <br>
+      Category: <br>
+      <input type="text" name="artwork_category"> <br>
+      Date (Year): <br>
+      <input type="number" name="artwork_date"> <br>
+      Thumbnail URL: <br>
+      <input type="url" name="artwork_thumbnail"> <br>
+     Partner: <br>
+     <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
+      <select id="new_partner" name="artwork_partner">
+        <option class="partner-options" value="null">None</option>
+        {{#each partners}}
+        <option class="partner-options" value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+      </select> <br>
 
-    *Gene (Select at least one): <br>
-    <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')" placeholder="Search for Genes..."><br>
-    <select multiple required id = "artwork_genes" name="genes_to_link">
-      {{#each genes}}
-        <option class = "gene_options" value={{this.id}} >{{this.name}}</option>
-      {{/each}}
-    </select> <br>
+      *Gene (Select at least one): <br>
+      <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')" placeholder="Search for Genes..."><br>
+      <select multiple required id = "artwork_genes" name="genes_to_link">
+        {{#each genes}}
+          <option class = "gene_options" value={{this.id}} >{{this.name}}</option>
+        {{/each}}
+      </select> <br>
 
-    <input type="submit">
-</form>
+      <input type="submit">
+  </form>
 
-<h2>Artwork in Collection</h2>
-<div class="card-columns">
-  {{#each artwork}}
-    <div class = "card" style = "width: 250px;">
-      <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' />
-      <div class = "card-body">
-        <h5 class="card-title">{{this.title}}</h5><br>
-        <em>Artist:</em> {{this.artist_name}}<br>
-        <em>Category:</em> {{this.category}}<br>
-        <em>Date:</em> {{this.date}}<br>
-        <em>Genes:</em>{{this.gene_names_comb}}<br>
-        <em>Partner:</em> {{this.partner_name}}<br>
-        <a class="btn btn-primary" href="/artwork/{{this.id}}">Update Artwork</a>
+  <h2>Artwork in Collection</h2>
+  <div class="card-columns">
+    {{#each artwork}}
+      <div class = "card" style = "width: 250px;">
+        <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' />
+        <div class = "card-body">
+          <h5 class="card-title">{{this.title}}</h5><br>
+          <em>Artist:</em> {{this.artist_name}}<br>
+          <em>Category:</em> {{this.category}}<br>
+          <em>Date:</em> {{this.date}}<br>
+          <em>Genes:</em>{{this.gene_names_comb}}<br>
+          <em>Partner:</em> {{this.partner_name}}<br>
+          <a class="btn btn-primary" href="/artwork/{{this.id}}">Update Artwork</a>
+        </div>
       </div>
-    </div>
-  {{/each}}
+    {{/each}}
+  </div>
 </div>

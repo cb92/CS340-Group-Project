@@ -1,27 +1,30 @@
-<h2>Move Artwork:</h2>
 
-<div class = "card" style = "width: 18rem;">
-  <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' />
-  <div class = "card-body">
-    <h5 class="card-title">{{this.artworkToUpdate.title}}</h5><br>
-    <em>Artist:</em> {{this.artworkToUpdate.artist_name}}<br>
-    <em>Category:</em> {{this.artworkToUpdate.category}}<br>
-    <em>Date:</em> {{this.artworkToUpdate.date}}<br>
-    <em>Genes:</em>{{this.artworkToUpdate.gene_names_comb}}<br>
-    <em>Partner:</em> {{this.artworkToUpdate.partner_name}}<br>
+<div class = "container">
+  <h2>Move Artwork:</h2>
+
+  <div class = "card" style = "width: 18rem;">
+    <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' />
+    <div class = "card-body">
+      <h5 class="card-title">{{this.artworkToUpdate.title}}</h5><br>
+      <em>Artist:</em> {{this.artworkToUpdate.artist_name}}<br>
+      <em>Category:</em> {{this.artworkToUpdate.category}}<br>
+      <em>Date:</em> {{this.artworkToUpdate.date}}<br>
+      <em>Genes:</em>{{this.artworkToUpdate.gene_names_comb}}<br>
+      <em>Partner:</em> {{this.artworkToUpdate.partner_name}}<br>
+    </div>
   </div>
+
+
+  Which partner would you like to move this artwork to? Use the searchbox to filter the options in the dropdown. If you would like to remove the artwork from any partner, select "None". <br>
+  <form id = "move-artwork" action="/artwork" method="post">
+  	<!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
+  	<select required id="new_partner" name="new_partner">
+  		<option class="partner-options" value="null">None</option>
+  		{{#each partners}}
+  		<option class="partner-options" value="{{this.id}}">{{this.name}}</option>
+  		{{/each}}
+  	</select>
+  	<button onclick="updateArtwork({{this.artworkToUpdate.id}})">Change Partner</button>
+  </form>
+  <script defer type="text/javascript">selectPartner({{this.artworkToUpdate.partner_id}})</script>
 </div>
-
-
-Which partner would you like to move this artwork to? Use the searchbox to filter the options in the dropdown. If you would like to remove the artwork from any partner, select "None". <br>
-<form id = "move-artwork" action="/artwork" method="post">
-	<!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
-	<select required id="new_partner" name="new_partner">
-		<option class="partner-options" value="null">None</option>
-		{{#each partners}}
-		<option class="partner-options" value="{{this.id}}">{{this.name}}</option>
-		{{/each}}
-	</select>
-	<button onclick="updateArtwork({{this.artworkToUpdate.id}})">Change Partner</button>
-</form>
-<script defer type="text/javascript">selectPartner({{this.artworkToUpdate.partner_id}})</script>

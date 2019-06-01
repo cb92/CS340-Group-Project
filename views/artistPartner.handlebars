@@ -1,44 +1,46 @@
-<h2>Link Artist/Partner:</h2>
-<p>Please link artists and partners that collaborate together. Select one artist and partner to link at a time.</p>
-<form id="newArtistPartner" action="/artistPartner" method="post" >
-    Artist: <br>
-    <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist-options')"><br-->
-    <select required name="artist">
-      {{#each artists}}
-      <option class = "artist-options" value={{this.id}}>{{this.name}}</option>
-      {{/each}}
-    </select> <br>
-    Partner: <br>
-    <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
-    <select required id="partner_to_link" name="partner">
-      {{#each partners}}
-      <option class="partner-options" value={{this.id}}>{{this.name}}</option>
-      {{/each}}
-    </select> <br>
+<div class = "container">
+  <h2>Link Artist/Partner:</h2>
+  <p>Please link artists and partners that collaborate together. Select one artist and partner to link at a time.</p>
+  <form id="newArtistPartner" action="/artistPartner" method="post" >
+      Artist: <br>
+      <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist-options')"><br-->
+      <select required name="artist">
+        {{#each artists}}
+        <option class = "artist-options" value={{this.id}}>{{this.name}}</option>
+        {{/each}}
+      </select> <br>
+      Partner: <br>
+      <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
+      <select required id="partner_to_link" name="partner">
+        {{#each partners}}
+        <option class="partner-options" value={{this.id}}>{{this.name}}</option>
+        {{/each}}
+      </select> <br>
 
 
 
-    <input type="submit">
-</form>
+      <input type="submit">
+  </form>
 
 
-<h2>Creative Difference?</h2>
+  <h2>Creative Difference?</h2>
 
-Has an artist/partner pair uncovered a creative difference?<br>Select a pair below to break up:<br>
-<div class="table-responsive">
-  <table class="table thead-dark">
-    <thead>
-      <th>Artist</th>
-      <th>Partner</th>
-    </thead>
-    <tbody>
-      {{#each artist_partners}}
-      <tr>
-        <td>{{this.artistName}}</td>
-        <td>{{this.partnerName}}</td>
-        <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})">Delete</button></td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
+  Has an artist/partner pair uncovered a creative difference?<br>Select a pair below to break up:<br>
+  <div class="table-responsive">
+    <table class="table thead-dark">
+      <thead>
+        <th>Artist</th>
+        <th>Partner</th>
+      </thead>
+      <tbody>
+        {{#each artist_partners}}
+        <tr>
+          <td>{{this.artistName}}</td>
+          <td>{{this.partnerName}}</td>
+          <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})">Delete</button></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>
