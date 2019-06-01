@@ -2,39 +2,55 @@
   <h2>Add Artwork:</h2>
   <p>All neccessary fields are marked with an asterisk.</p>
   <p>To select multiple genes, select while pressing command/control. Note that Artist+Title+Date must be unique.</p>
-  <form class="" action="/artwork" method="post" id="newArtwork">
+  <form action="/artwork" method="post" id="newArtwork">
+  <div class="form-group">
       *Title: <br>
       <input required type="text" name="artwork_title"> <br>
+      </div>
+  <div class="form-group">
       *Artist: <br>
       <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist_options')"><br-->
-      <select required id="artwork_artist" name="artist_id">
+      <select required id="artwork_artist" name="artist_id" class="form-control">
         {{#each artists}}
           <option class="artist_options" value={{this.id}}>{{this.name}}</option>
         {{/each}}
       </select> <br>
+      </div>
 
+  <div class="form-group">
       Category: <br>
       <input type="text" name="artwork_category"> <br>
+  </div>
+<div class="form-group">
       Date (Year): <br>
       <input type="number" name="artwork_date"> <br>
+</div>
+
+  <div class="form-group">
       Thumbnail URL: <br>
       <input type="url" name="artwork_thumbnail"> <br>
+</div>
+
+  <div class="form-group">
      Partner: <br>
      <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
-      <select id="new_partner" name="artwork_partner">
+      <select id="new_partner" name="artwork_partner" class="form-control">
         <option class="partner-options" value="null">None</option>
         {{#each partners}}
         <option class="partner-options" value="{{this.id}}">{{this.name}}</option>
         {{/each}}
       </select> <br>
+      </div>
 
+  <div class="form-group">
       *Gene (Select at least one): <br>
       <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')" placeholder="Search for Genes..."><br>
-      <select multiple required id = "artwork_genes" name="genes_to_link">
+      <select multiple required id = "artwork_genes" name="genes_to_link" class = "form-control">
         {{#each genes}}
           <option class = "gene_options" value={{this.id}} >{{this.name}}</option>
         {{/each}}
       </select> <br>
+      </div>
 
       <input type="submit">
   </form>
