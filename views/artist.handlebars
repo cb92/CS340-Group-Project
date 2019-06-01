@@ -43,22 +43,24 @@
 
 <br>
 <h2>Artists:</h2>
-<table>
-  <tr>
-    <th>Artist</th>
-    <th>Hometown</th>
-    <th>Birthday</th>
-    <th>Deathday</th>
-    <th>Biography</th>
-  </tr>
+<div class="table-responsive">
+  <table class="table thead-dark">
+    <tr>
+      <th>Artist</th>
+      <th>Hometown</th>
+      <th>Birthday</th>
+      <th>Deathday</th>
+      <th>Biography</th>
+    </tr>
 
-  {{#each artists}}
-  <tr>
-    <td>{{this.name}}</td>
-    <td>{{this.hometown}}</td>
-    <td>{{this.birthday}}</td>
-    <td>{{this.deathday}}</td>
-    <td>{{this.biography}}</td>
-  </tr>
-  {{/each}}
-</table>
+    {{#each artists}}
+    <tr>
+      <td>{{this.name}}</td>
+      <td>{{this.hometown}}</td>
+      <td>{{this.birthday}}</td>
+      <td>{{this.deathday}}</td>
+      <td>{{this.biography}}</td>
+    </tr>
+    {{/each}}
+  </table>
+</div>

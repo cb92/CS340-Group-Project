@@ -13,7 +13,7 @@
 </div>
 
 
-Whic partner would you like to move this artwork to?<br>
+Which partner would you like to move this artwork to? Use the searchbox to filter the options in the dropdown. If you would like to remove the artwork from any partner, select "None". <br>
 <form id = "move-artwork" action="/artwork" method="post">
 	<input type="text" id="partner-search-string" onkeyup="filterValues()">
 	<select id="new_partner" name="new_partner">
@@ -23,4 +23,4 @@ Whic partner would you like to move this artwork to?<br>
 		{{/each}}
 	</select>
 	<button onclick="updateArtwork({{this.artworkToUpdate.id}})">Change Partner</button>
-</form>h
+</form>

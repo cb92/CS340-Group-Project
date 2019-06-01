@@ -16,22 +16,24 @@
 <h2>Partners:</h2>
 If a partner is no longer working, please remove them from the list.</br>
 
-<table>
-  <thead>
-    <th>Name</th>
-    <th>Type</th>
-    <th>Email</th>
-    <th>Region</th>
-  </thead>
-  <tbody>
-    {{#each partners}}
-    <tr>
-      <td>{{name}}</td>
-      <td>{{type}}</td>
-      <td>{{email}}</td>
-      <td>{{region}}</td>
-      <td><button onclick="deletePartner({{id}})">Delete</button></td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table thead-dark">
+    <thead>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Email</th>
+      <th>Region</th>
+    </thead>
+    <tbody>
+      {{#each partners}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>{{email}}</td>
+        <td>{{region}}</td>
+        <td><button onclick="deletePartner({{id}})">Delete</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

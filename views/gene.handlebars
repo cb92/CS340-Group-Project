@@ -16,19 +16,19 @@
 </form*>
 
 <h2>Genes:</h2>
-
-<table>
-  <thead>
-    <th>Gene Name</th>
-    <th>Description</th>
-  </thead>
-  <tbody>
-    {{#each genes}}
-    <tr>
-      <td>{{name}}</td>
-      <td>{{description}}</td>
-    </tr>
-    {{/each}}
-  </tbody>
-
-</table>
+<div class="table-responsive">
+  <table class="table thead-dark">
+    <thead>
+      <th>Gene Name</th>
+      <th>Description</th>
+    </thead>
+    <tbody>
+      {{#each genes}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

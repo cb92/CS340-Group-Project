@@ -20,19 +20,20 @@
 <h2>Creative Difference?</h2>
 
 Has an artist/partner pair uncovered a creative difference?<br>Select a pair below to break up:<br>
-
-<table>
-  <thead>
-    <th>Artist</th>
-    <th>Partner</th>
-  </thead>
-  <tbody>
-    {{#each artist_partners}}
-    <tr>
-      <td>{{this.artistName}}</td>
-      <td>{{this.partnerName}}</td>
-      <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})">Delete</button></td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="table-responsive">
+  <table class="table thead-dark">
+    <thead>
+      <th>Artist</th>
+      <th>Partner</th>
+    </thead>
+    <tbody>
+      {{#each artist_partners}}
+      <tr>
+        <td>{{this.artistName}}</td>
+        <td>{{this.partnerName}}</td>
+        <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})">Delete</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
