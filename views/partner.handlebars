@@ -11,7 +11,7 @@
       <input type="email" name="email"> <br>
       Region: <br>
       <input type="text" name="region"> <br>
-      <input type="submit">
+      <input type="submit" class = "btn btn-primary">
   </form>
 
   <h2>Partners:</h2>
@@ -33,7 +33,7 @@
           <td>{{type}}</td>
           <td>{{email}}</td>
           <td>{{region}}</td>
-          <td><button onclick="deletePartner({{id}})">Delete</button></td>
+          <td><button onclick="deletePartner({{id}})"  class = "btn btn-secondary">Delete</button></td>
         </tr>
         {{/each}}
       </tbody>

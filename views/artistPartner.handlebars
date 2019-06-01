@@ -19,7 +19,7 @@
 
 
 
-      <input type="submit">
+      <input type="submit"  class = "btn btn-primary">
   </form>
 
 
@@ -38,7 +38,7 @@
         <tr>
           <td>{{this.artistName}}</td>
           <td>{{this.partnerName}}</td>
-          <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})">Delete</button></td>
+          <td><button onclick="deleteArtistPartner({{this.artist_id}}, {{this.partner_id}})" class = "btn btn-secondary">Delete</button></td>
         </tr>
         {{/each}}
       </tbody>
