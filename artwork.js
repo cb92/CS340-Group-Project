@@ -32,7 +32,7 @@ module.exports = function() {
 
 	function getOneArtwork(res, mysql, context, complete, id)
 	{
-		var sql = "SELECT a.id, a.title, ar.name as artist_name, case when a.thumbnail_url is null then 'null' else a.thumbnail_url end as thumbnail_url, a.date, a.category, p.name as partner_name\
+		var sql = "SELECT a.id, a.title, ar.name as artist_name, case when a.thumbnail_url is null then 'null' else a.thumbnail_url end as thumbnail_url, a.date, a.category, p.name as partner_name, p.id as partner_id\
 			FROM artwork a \
 			left join artist ar on a.artist_id=ar.id \
 			left join partner p on a.partner_id = p.id \

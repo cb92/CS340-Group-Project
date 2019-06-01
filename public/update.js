@@ -9,3 +9,12 @@ function updateArtwork(id)
 
 	})
 };
+
+function selectPartner(id)
+{
+	if (id)
+		document.getElementById("new_partner").value=id
+	else 
+		document.getElementById("new_partner").value="null";
+
+}
