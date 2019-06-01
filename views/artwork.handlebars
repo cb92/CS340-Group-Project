@@ -3,9 +3,9 @@
 <p>To select multiple genes, select while pressing command/control. Note that Artist+Title+Date must be unique.</p>
 <form class="" action="/artwork" method="post" id="newArtwork">
     *Title: <br>
-    <input type="text" name="artwork_title"> <br>
+    <input required type="text" name="artwork_title"> <br>
     *Artist: <br>
-      <input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist_options')"><br>
+    <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist_options')"><br-->
     <select required id="artwork_artist" name="artist_id">
       {{#each artists}}
         <option class="artist_options" value={{this.id}}>{{this.name}}</option>
@@ -19,7 +19,7 @@
     Thumbnail URL: <br>
     <input type="url" name="artwork_thumbnail"> <br>
    Partner: <br>
-   <input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br>
+   <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
     <select id="new_partner" name="artwork_partner">
       <option class="partner-options" value="null">None</option>
       {{#each partners}}
@@ -27,8 +27,8 @@
       {{/each}}
     </select>
 
-    Gene (Select at least one): <br>
-    <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')"><br>
+    *Gene (Select at least one): <br>
+    <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')" placeholder="Search for Genes..."><br>
     <select multiple required id = "artwork_genes" name="genes_to_link">
       {{#each genes}}
         <option class = "gene_options" value={{this.id}} >{{this.name}}</option>

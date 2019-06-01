@@ -6,8 +6,8 @@
     <input required type="text" name="name"> <br>
     Description: <br>
     <textarea rows="4" cols="50" name="description" form="newGene"></textarea> <br>
-     Artworks in this Gene (Select at least one): <br>
-     <input type="text" id="artwork_search_string" onkeyup="filterValues('artwork_search_string','.artwork_options')"><br>
+     *Artworks in this Gene (Select at least one): <br>
+     <input type="text" id="artwork_search_string" onkeyup="filterValues('artwork_search_string','.artwork_options')" placeholder="Search for Artwork..."><br>
     <select multiple required id="artwork_options" name="artworks_to_link">
       {{#each artworks}}
       <option class="artwork_options" value={{id}}>{{title}}</option>
@@ -18,7 +18,7 @@
 
 
     <input type="submit">
-</form*>
+</form>
 
 <h2>Genes:</h2>
 <div class="table-responsive">
