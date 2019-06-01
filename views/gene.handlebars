@@ -7,11 +7,16 @@
     Description: <br>
     <textarea rows="4" cols="50" name="description" form="newGene"></textarea> <br>
      Artworks in this Gene (Select at least one): <br>
-    <select multiple required name="artworks_to_link">
+     <input type="text" id="artwork_search_string" onkeyup="filterValues('artwork_search_string','.artwork_options')"><br>
+    <select multiple required id="artwork_options" name="artworks_to_link">
       {{#each artworks}}
-      <option value={{id}}>{{title}}</option>
+      <option class="artwork_options" value={{id}}>{{title}}</option>
       {{/each}}
     </select> <br>
+
+
+
+
     <input type="submit">
 </form*>
 

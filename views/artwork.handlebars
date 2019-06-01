@@ -5,11 +5,13 @@
     *Title: <br>
     <input type="text" name="artwork_title"> <br>
     *Artist: <br>
-    <select name="artist_id">
+      <input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist_options')"><br>
+    <select required id="artwork_artist" name="artist_id">
       {{#each artists}}
-        <option value={{this.id}}>{{this.name}}</option>
+        <option class="artist_options" value={{this.id}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
+
     Category: <br>
     <input type="text" name="artwork_category"> <br>
     Date (Year): <br>
@@ -17,12 +19,13 @@
     Thumbnail URL: <br>
     <input type="url" name="artwork_thumbnail"> <br>
    Partner: <br>
-    <select id = "artwork_partner" name="artwork_partner">
-      <option value="null">NONE</option>
+   <input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br>
+    <select id="new_partner" name="artwork_partner">
+      <option class="partner-options" value="null">None</option>
       {{#each partners}}
-        <option value={{this.id}}>{{this.name}}</option>
+      <option class="partner-options" value="{{this.id}}">{{this.name}}</option>
       {{/each}}
-    </select> <br>
+    </select>
 
     Gene (Select at least one): <br>
     <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')"><br>

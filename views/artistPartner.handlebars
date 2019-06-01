@@ -2,17 +2,22 @@
 <p>Please link artists and partners that collaborate together. Select one artist and partner to link at a time.</p>
 <form id="newArtistPartner" action="/artistPartner" method="post" >
     Artist: <br>
-    <select name="artist">
+    <input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist-options')"><br>
+    <select required name="artist">
       {{#each artists}}
-      <option value={{this.id}}>{{this.name}}</option>
+      <option class = "artist-options" value={{this.id}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
     Partner: <br>
-    <select name="partner">
+    <input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br>
+    <select required id="partner_to_link" name="partner">
       {{#each partners}}
-      <option value={{this.id}}>{{this.name}}</option>
+      <option class="partner-options" value={{this.id}}>{{this.name}}</option>
       {{/each}}
     </select> <br>
+
+
+
     <input type="submit">
 </form>
 
