@@ -40,3 +40,16 @@ a
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
+form
+{
+    padding-bottom: 50px;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+
+textarea
+{
+    max-width: 90%;
+}
