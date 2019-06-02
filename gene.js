@@ -47,6 +47,7 @@ module.exports = function() {
 		var callbackCount = 0;
 		var context = {};
     context.jsscripts=["filter.js"];
+    context.title="Gene";
 		var mysql = req.app.get("mysql");
 
     //REMOVE for testing

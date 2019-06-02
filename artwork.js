@@ -89,6 +89,7 @@ module.exports = function() {
 		var callbackCount = 0;
 		var context = {};
 		context.jsscripts = ["cleanURL.js", "filter.js"];
+		context.title="Artwork";
 		var mysql = req.app.get("mysql");
 		getArtists(res, mysql, context, complete);
 		getPartners(res, mysql, context, complete);
@@ -157,6 +158,7 @@ module.exports = function() {
 		getOneArtwork(res, mysql, context, complete, req.params.id);
 		getPartners(res, mysql, context, complete);
 		context.jsscripts = ["filter.js", "update.js", "cleanURL.js"];
+		context.title="Update Artwork";
 		function complete() {
 			callbackCount++;
 			if (callbackCount>=2)

@@ -48,6 +48,7 @@ module.exports = function() {
 		var callbackCount = 0;
 		var context = {};
     context.jsscripts = ["deleteartistpartner.js","filter.js"];
+    context.title="Artist/Partner";
 		var mysql = req.app.get("mysql");
     getArtists(res, mysql, context, complete);
     getArtistPartners(res, mysql, context, complete);

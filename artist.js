@@ -50,6 +50,7 @@ module.exports = function() {
 		var callbackCount = 0;
 		var context = {};
 		context.jsscripts=["filter.js"];
+		context.title="Artist";
 		var mysql = req.app.get("mysql");
 		getArtists(res, mysql, context, complete);
 		getPartners(res, mysql, context, complete);

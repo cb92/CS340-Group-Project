@@ -20,6 +20,7 @@ module.exports = function() {
 		var callbackCount = 0;
 		var context = {};
     context.jsscripts = ["deletepartner.js","filter.js"];
+    context.title="Partner";
 
 		var mysql = req.app.get("mysql");
 		getPartners(res, mysql, context, complete);
