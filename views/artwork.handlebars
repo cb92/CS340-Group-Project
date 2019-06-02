@@ -43,7 +43,7 @@
   <div class="card-columns">
     {{#each artwork}}
       <div class = "card" style = "width: 250px;">
-        <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' />
+        <img class="card-img-top" src= "{{this.thumbnail_url}}" onload='this.onload=null; this.src=cleanPhotoURL("{{thumbnail_url}}");' onerror='this.onerror=null; this.src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Missing-image-232x150.png";' />
         <div class = "card-body">
           <h5 class="card-title">{{this.title}}</h5><br>
           <em>Artist:</em> {{this.artist_name}}<br>

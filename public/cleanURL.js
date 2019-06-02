@@ -1,6 +1,6 @@
 function cleanPhotoURL(photoURL)
 {
-	if (photoURL && photoURL!="null")
+	if (photoURL && photoURL!="null" && photoURL!="")
 		return photoURL;
 	else 
 	{
