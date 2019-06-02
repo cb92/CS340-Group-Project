@@ -106,7 +106,6 @@ module.exports = function() {
 
 
 	router.post("/", function(req,res){
-		console.log(req.body);
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, ?, ?, ?, ?, ?);";
 		var inserts = [req.body.artwork_title, req.body.artist_id, req.body.artwork_category, req.body.artwork_date, req.body.artwork_thumbnail,req.body.artwork_partner];
@@ -115,7 +114,6 @@ module.exports = function() {
 			inserts[5] = null;
 		}
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-			console.log("running query 1");
 			if(error) {
 				res.write(JSON.stringify(error));
 				res.end();
@@ -137,7 +135,6 @@ module.exports = function() {
 					sql+=";";
 				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-					console.log("running query 2");
 					if(error) {
 						res.write(JSON.stringify(error));
 						res.end();

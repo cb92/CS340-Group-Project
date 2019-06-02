@@ -67,7 +67,6 @@ module.exports = function() {
 		var sql = "INSERT INTO artist (name, hometown, birthday, deathday, biography) VALUES  (?, ?, ?, ?, ?);";
 		var inserts = [req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography];
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-			console.log("running query 1");
 			if (error) {
 				res.write(JSON.stringify(error));
 				res.end();
@@ -80,7 +79,6 @@ module.exports = function() {
 					inserts[6] = null;
 				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-					console.log("running query 2");
 					if(error) {
 						res.write(JSON.stringify(error));
 						res.end();
@@ -102,7 +100,6 @@ module.exports = function() {
 							sql+=";";
 						}
 						sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-						console.log("running query 3");
 						if(error) {
 							res.write(JSON.stringify(error));
 							res.end();

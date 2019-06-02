@@ -17,6 +17,9 @@ SELECT name, id FROM gene; -- to populate Gene list in Artwork
 SELECT * FROM artist; -- to populate Artist table
 SELECT name, id FROM partner;
 
+
+
+
 ### PARTNER PAGE
 INSERT INTO partner (name, type, email, region)
 VALUES (:name, :type, :email, :region);
@@ -25,6 +28,8 @@ SELECT id, name, type, email, region FROM partner; -- to populate table
 
 DELETE FROM partner
 WHERE id = :id_to_delete;
+
+
 
 
 ### GENE PAGE
@@ -38,22 +43,37 @@ VALUES (:selected_artwork_id_i, (SELECT id FROM gene where name = :name));
 SELECT name, description FROM gene;
 SELECT id, title FROM artwork;
 
+
+
+
 ### ARTIST PARTNER PAGE
 SELECT id, name from artist;
 SELECT name, id from partner;
+SELECT artist_partner.artist_id, artist_partner.partner_id, artist.name AS artistName, partner.name AS partnerName FROM artist_partner INNER JOIN artist ON artist_partner.artist_id = artist.id INNER JOIN partner ON artist_partner.partner_id = partner.id;
+
 INSERT INTO artist_partner (artist_id, partner_id)
 VALUES (:artist_id, :partner_id);
-
-SELECT artist_partner.artist_id, artist_partner.partner_id, artist.name AS artistName, partner.name AS partnerName FROM artist_partner INNER JOIN artist ON artist_partner.artist_id = artist.id INNER JOIN partner ON artist_partner.partner_id = partner.id;
 
 DELETE FROM artist_partner
 WHERE partner_id = :pid_to_delete
 AND artist_id = :aid_to_delete;
 
+
+
+
 ### ARTWORK PAGE
 SELECT name, id from artist;
 SELECT name, id from partner;
 SELECT name, id from gene;
+# Display Artwork SELECT query
+SELECT id, title, case when thumbnail_url is null then 'null' else thumbnail_url end as thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM ( 
+	SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name 
+	FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id 
+	left join gene g on ag.gene_id=g.id 
+	left join partner p on a.partner_id = p.id 
+	left join artist ar on a.artist_id=ar.id) a 
+GROUP BY id, title, thumbnail_url, artist_name, date, category, partner_name;
+
 INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id)
 VALUES (:title, :artist_id, :category, :date, :thumbnail_url, :partner_id);
 
@@ -61,19 +81,19 @@ VALUES (:title, :artist_id, :category, :date, :thumbnail_url, :partner_id);
 INSERT INTO artwork_gene (artwork_id, gene_id)
 VALUES ((SELECT id FROM artwork where title=:title and artist_id = :artist_id and date = :date), :selected_gene_id_i);
 
-# to update partner
-SELECT name, region FROM partner;
+
+
+
+### UPDATE ARTWORK PAGE
+SELECT name, id from partner;
+SELECT a.id, a.title, ar.name as artist_name, case when a.thumbnail_url is null then 'null' else a.thumbnail_url end as thumbnail_url, a.date, a.category, p.name as partner_name, p.id as partner_id
+	FROM artwork a 
+	left join artist ar on a.artist_id=ar.id 
+	left join partner p on a.partner_id = p.id 
+where a.id=:artwork_id_to_update; 
 
 UPDATE artwork SET partner_id = :pid_selected
 WHERE id = :aid_to_move;
 
-# Display Artwork SELECT query
-SELECT concat('partnerChangeModal', id) as modal_id, concat('#partnerChangeModal', id) as modal_id_target, title, thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM (
-	SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name
-	FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id 
-	left join gene g on ag.gene_id=g.id
-	left join partner p on a.partner_id = p.id
-	left join artist ar on a.artist_id=ar.id) a
-GROUP BY id, title, thumbnail_url, artist_name, date, category, partner_name;
 
 
