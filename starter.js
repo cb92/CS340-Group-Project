@@ -2,7 +2,7 @@ module.exports = function() {
 	var express = require('express');
 	var router = express.Router();
 
-
+	//Drop all Tables
   function dropTable(mysql, complete, name) {
     sqlString = "DROP TABLE IF EXISTS " + name;
     mysql.pool.query(sqlString, function(error, results, fields){
@@ -16,6 +16,7 @@ module.exports = function() {
     });
   }
 
+	//Call to drop tables and begin making tables
   function setDB(mysql) {
     console.log("Setting Up Database");
     var callback = 0;
@@ -37,6 +38,7 @@ module.exports = function() {
     }
   }
 
+	//Make each Table (nested calls)
   function makeArtist(mysql) {
     sqlString = "CREATE TABLE artist (" +
       "id int(11) NOT NULL AUTO_INCREMENT," +
@@ -160,93 +162,10 @@ module.exports = function() {
 
   }
 
-  var request = require('request');
-  // var request = require('superagent');
-  var token;
-
-  function connectAPI() {
-    	router.get("/", function(req, res){
-    		var callbackCount = 0;
-    		var context = {};
-        context.jsscripts=["filter.js"];
-        context.title="Gene";
-    		var mysql = req.app.get("mysql");
-
-        //REMOVE for testing
-        // deleteGenes(res, mysql);
-
-    		getGenes(res, mysql, context, complete);
-        getArtworks(res, mysql, context, complete);
-    		function complete() {
-    			callbackCount++;
-    			if (callbackCount == 2)
-    				res.render('gene',context);
-    		}
-
-
-    	});
-
-      request({
-             "url":"https://api.artsy.net/api/tokens/xapp_token?client_id=e620889611e0b9c2f3ec&client_secret=5f1d66d4bc8984ea0bebc1680fd2b24f",
-             "method":"POST",
-             "headers":{
-               "Content-Type":"application/json"
-             },
-             "body":'{}'
-           }, function(err, response, body){
-             if(!err && response.statusCode < 400){
-               console.log("Connected to Artsy API; retreived token");
-               token = JSON.parse(body).token;
-               getArtist();
-             }else{
-               console.log(err);
-             }
-           }
-        );
-  }
-
-
-  function getArtist() {
-
-    request({
-           "url":"https://api.artsy.net/api/artists?artworks=true&size=10",
-           "method":"GET",
-           "headers":{
-             'X-Xapp-Token': token,
-             'Accept': 'application/vnd.artsy-v2+json'
-           },
-         }, function(err, response, body){
-           if(!err && response.statusCode < 400){
-            var artistList = [];
-            var artists = JSON.parse(response.body)._embedded.artists;
-            for (var i = 0; i < artists.length; i++) {
-              var artist = {};
-              artist.name = artists[i].name;
-              artist.birthday = artists[i].birthday;
-              artist.deathday = artists[i].deathday;
-              artist.hometown = artists[i].hometown;
-              artist.id = artists[i].id;
-              artist.biography = artists[i].biography;
-              artistList.push(artist);
-            }
-            console.log(artistList);
-           }else{
-             console.log("Error connected to ARTSY API while retrieving Artist");
-             console.log(err);
-           }
-         });
-
-  }
-
-
   router.get("/", function(req, res){
     var mysql = req.app.get("mysql");
-    setDB(mysql);
-    connectAPI();
     res.render('home');
-
   });
-
 
 	return router;
 }();
