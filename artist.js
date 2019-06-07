@@ -68,8 +68,8 @@ module.exports = function() {
 		var inserts = [req.body.name, req.body.hometown, req.body.birthday, req.body.deathday, req.body.biography];
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 			if (error) {
-				res.write(JSON.stringify(error));
-				res.end();
+				console.log(JSON.stringify(error));
+				res.redirect('/artist');
 			} else
 			{
 				sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, (SELECT id FROM artist WHERE name = ? and birthday=?), ?, ?, ?, ?);";
@@ -80,8 +80,8 @@ module.exports = function() {
 				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					if(error) {
-						res.write(JSON.stringify(error));
-						res.end();
+						console.log(JSON.stringify(error));
+						res.redirect('/artist');
 					}
 					else {
 						sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = (SELECT id FROM artist WHERE name = ? and birthday=?) and date = ?), ?)";
@@ -101,15 +101,15 @@ module.exports = function() {
 						}
 						sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 						if(error) {
-							res.write(JSON.stringify(error));
-							res.end();
+							console.log(JSON.stringify(error));
+							res.redirect('/artist');
 						}
 						else {
 							res.redirect('/artist');
 						}
 					});
 					}
-				});			
+				});
 			}
 		});
 	});

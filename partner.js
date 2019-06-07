@@ -37,10 +37,10 @@ module.exports = function() {
     var inserts = [req.body.name, req.body.type, req.body.email, req.body.region];
     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
       if (error) {
-        res.write(JSON.stringify(error));
-        res.end();
-      } else {
+				console.log(JSON.stringify(error));
         res.redirect('/partner');
+      } else {
+				res.redirect('/partner');
       }
     });
   });
@@ -51,9 +51,8 @@ module.exports = function() {
       var inserts = [req.params.id];
       sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
         if (error) {
-          res.write(JSON.stringify(error));
-          res.status(400);
-          res.end();
+					console.log(JSON.stringify(error));
+					res.redirect('/partner');
         } else {
           res.status(202).end();
         }

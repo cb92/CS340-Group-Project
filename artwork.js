@@ -71,7 +71,7 @@ module.exports = function() {
 				left join gene g on ag.gene_id=g.id \
 				left join partner p on a.partner_id = p.id \
 				left join artist ar on a.artist_id=ar.id) a \
-			GROUP BY id, title, thumbnail_url, artist_name, date, category, partner_name;", 
+			GROUP BY id, title, thumbnail_url, artist_name, date, category, partner_name;",
 			function(error, results, fields){
 			if (error)
 			{
@@ -115,8 +115,8 @@ module.exports = function() {
 		}
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 			if(error) {
-				res.write(JSON.stringify(error));
-				res.end();
+				console.log(JSON.stringify(error));
+				res.redirect('/artwork');
 			}
 			else {
 				sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?)";
@@ -136,15 +136,15 @@ module.exports = function() {
 				}
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					if(error) {
-						res.write(JSON.stringify(error));
-						res.end();
+						console.log(JSON.stringify(error));
+						res.redirect('/artwork');
 					}
 					else {
 						res.redirect('/artwork');
 					}
 				});
 			}
-		});			
+		});
 	});
 
 
@@ -172,8 +172,8 @@ module.exports = function() {
 			inserts[0]=null;
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 			if(error) {
-				res.write(JSON.stringify(error));
-				res.end();
+				console.log(JSON.stringify(error));
+				res.redirect('/artwork');
 			}
 			else {
 				res.status(200);

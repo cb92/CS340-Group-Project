@@ -66,8 +66,8 @@ module.exports = function() {
     var inserts = [req.body.artist, req.body.partner];
     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
       if (error) {
-        res.write(JSON.stringify(error));
-        res.end;
+				console.log(JSON.stringify(error));
+				res.redirect('/artistPartner');
       } else {
         res.redirect('/artistPartner');
       }

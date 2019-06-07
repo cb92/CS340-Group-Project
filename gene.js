@@ -71,8 +71,8 @@ module.exports = function() {
     var sql = "INSERT INTO gene (name, description) VALUES (?, ?)";
     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
       if (error) {
-        res.write(JSON.stringify(error));
-        res.end();
+				console.log(JSON.stringify(error));
+				res.redirect('/gene');
       } else {
 
         sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES (?, (SELECT id FROM gene WHERE name = ?))";
@@ -93,8 +93,8 @@ module.exports = function() {
 
         sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
           if (error) {
-            res.write(JSON.stringify(error));
-            res.end();
+						console.log(JSON.stringify(error));
+						res.redirect('/gene');
           } else {
             res.redirect('/gene');
           }
