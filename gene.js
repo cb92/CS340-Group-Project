@@ -2,6 +2,7 @@ module.exports = function() {
 	var express = require('express');
 	var router = express.Router();
 
+	//Retrieve from Database
   function getGenes(res, mysql, context, complete)
 	{
 		mysql.pool.query("SELECT name, description FROM gene", function(error, results, fields){
@@ -29,30 +30,13 @@ module.exports = function() {
 		});
 	};
 
-
-
-// To Remove Test Inserts
-  // function deleteGenes(res, mysql) {
-  //   var sql = "DELETE FROM gene WHERE id > 2";
-  //   sql = mysql.pool.query(sql, function(error, results, fields) {
-  //     if (error) {
-  //       res.write(JSON.stringify(error));
-  //       res.end;
-  //     }
-  //   });
-  //   console.log("deleted");
-  // };
-
+	//For all get request: render page with table.
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
     context.jsscripts=["filter.js"];
     context.title="Gene";
 		var mysql = req.app.get("mysql");
-
-    //REMOVE for testing
-    // deleteGenes(res, mysql);
-
 		getGenes(res, mysql, context, complete);
     getArtworks(res, mysql, context, complete);
 		function complete() {
@@ -60,10 +44,9 @@ module.exports = function() {
 			if (callbackCount == 2)
 				res.render('gene',context);
 		}
-
-
 	});
 
+	//For all post requests: form submissions (insert new gene & new artwork_gene relationship)
   router.post("/", function(req, res){
     var mysql = req.app.get("mysql");
     var inserts = [req.body.name, req.body.description];
@@ -101,7 +84,6 @@ module.exports = function() {
         });
       }
     });
-
    });
 
   return router;

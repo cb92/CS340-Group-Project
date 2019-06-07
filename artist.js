@@ -3,6 +3,7 @@ module.exports = function() {
 	var router = express.Router();
 
 
+	//Retrieve from Database
 	function getGenes(res, mysql, context, complete)
 	{
 		mysql.pool.query("SELECT name, id FROM gene", function(error, results, fields){
@@ -45,7 +46,7 @@ module.exports = function() {
 
 	};
 
-
+	//For all get request: render page with table.
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
@@ -62,6 +63,7 @@ module.exports = function() {
 		}
 	});
 
+	//For all post requests: form submissions (insert new artist)
 	router.post("/", function(req,res){
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO artist (name, hometown, birthday, deathday, biography) VALUES  (?, ?, ?, ?, ?);";
@@ -100,20 +102,19 @@ module.exports = function() {
 							sql+=";";
 						}
 						sql = mysql.pool.query(sql, inserts, function(error, results, fields){
-						if(error) {
-							console.log(JSON.stringify(error));
-							res.redirect('/artist');
-						}
-						else {
-							res.redirect('/artist');
-						}
-					});
+							if(error) {
+								console.log(JSON.stringify(error));
+								res.redirect('/artist');
+							}
+							else {
+								res.redirect('/artist');
+							}
+						});
 					}
 				});
 			}
 		});
 	});
-
 
 	return router;
 }();

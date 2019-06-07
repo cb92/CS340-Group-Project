@@ -2,7 +2,7 @@ module.exports = function() {
 	var express = require('express');
 	var router = express.Router();
 
-
+	//Retrieve from Database
 	function getGenes(res, mysql, context, complete)
 	{
 		mysql.pool.query("SELECT name, id FROM gene", function(error, results, fields){
@@ -32,11 +32,11 @@ module.exports = function() {
 
 	function getOneArtwork(res, mysql, context, complete, id)
 	{
-		var sql = "SELECT a.id, a.title, ar.name as artist_name, case when a.thumbnail_url is null then 'null' else a.thumbnail_url end as thumbnail_url, a.date, a.category, p.name as partner_name, p.id as partner_id\
+		var sql = "SELECT a.id, a.title, ar.name as artist_name, CASE WHEN a.thumbnail_url IS NULL THEN 'null' ELSE a.thumbnail_url END AS thumbnail_url, a.date, a.category, p.name AS partner_name, p.id AS partner_id\
 			FROM artwork a \
-			left join artist ar on a.artist_id=ar.id \
-			left join partner p on a.partner_id = p.id \
-			where a.id=?; ";
+			LEFT JOIN artist ar ON a.artist_id=ar.id \
+			LEFT JOIN partner p ON a.partner_id = p.id \
+			WHERE a.id=?; ";
 		mysql.pool.query(sql, id, function(error, results, fields){
 			if (error)
 			{
@@ -61,7 +61,6 @@ module.exports = function() {
 		});
 	};
 
-
 	function getArtwork(res, mysql, context, complete)
 	{
 		mysql.pool.query(
@@ -80,11 +79,10 @@ module.exports = function() {
 			}
 			context.artwork = results;
 			complete();
-
 		});
 	};
 
-
+	//For all get request: render page with table.
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
@@ -104,7 +102,7 @@ module.exports = function() {
 
 
 
-
+	//For all post requests: form submissions (insert new artwork & new artwork_gene relationship)
 	router.post("/", function(req,res){
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, ?, ?, ?, ?, ?);";
@@ -147,7 +145,7 @@ module.exports = function() {
 		});
 	});
 
-
+	//For all update requests: render prefilled form
 	router.get("/:id", function(req, res){
 		var callbackCount = 0;
 		var context = {};
@@ -163,7 +161,7 @@ module.exports = function() {
 		}
 	});
 
-
+	//For all update requests: form submissions (update existing artwork)
 	router.put("/:id", function(req, res){
 		var mysql = req.app.get("mysql");
 		var sql = "UPDATE artwork SET partner_id = ? WHERE id = ?;"
@@ -181,6 +179,5 @@ module.exports = function() {
 			}
 		});
 	});
-
 	return router;
 }();

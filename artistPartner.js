@@ -2,7 +2,7 @@ module.exports = function() {
 	var express = require('express');
 	var router = express.Router();
 
-
+		//Retrieve from Database
   	function getArtists(res, mysql, context, complete)
   	{
   		mysql.pool.query("SELECT id, name FROM artist", function(error, results, fields){
@@ -26,9 +26,7 @@ module.exports = function() {
   			}
   			context.partners = results;
   			complete();
-
   		});
-
   	};
 
   function getArtistPartners(res, mysql, context, complete)
@@ -44,6 +42,7 @@ module.exports = function() {
     });
   };
 
+	//For all get request: render page with table.
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
@@ -60,6 +59,7 @@ module.exports = function() {
 		}
 	});
 
+	//For all post requests: form submissions (insert new artist_partner relationship)
   router.post("/", function(req, res){
     var mysql = req.app.get("mysql");
     var sql = "INSERT INTO artist_partner (artist_id, partner_id) VALUES (?, ?)";
@@ -74,6 +74,7 @@ module.exports = function() {
     });
   });
 
+	//For all delete requests
   router.delete("/:artistId/:partnerId", function(req,res) {
       var mysql = req.app.get('mysql');
       var sql = "DELETE FROM artist_partner WHERE artist_id = ? AND partner_id = ?";
@@ -87,9 +88,7 @@ module.exports = function() {
           res.status(202).end();
         }
       })
-
   })
-
 
   return router;
 }();
