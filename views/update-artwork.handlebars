@@ -24,8 +24,8 @@
   		<option class="partner-options" value="{{this.id}}">{{this.name}}</option>
   		{{/each}}
   	</select>
-  	<button onclick="updateArtwork({{this.artworkToUpdate.id}})"  class = "btn btn-primary">Change Partner</button>
-    <a class="btn btn-secondary" href="/artwork/">Cancel</a>
   </form>
+  <button onclick="updateArtwork({{this.artworkToUpdate.id}})"  class = "btn btn-primary">Change Partner</button>
+  <a class="btn btn-secondary" href="/artwork/">Cancel</a>
   <script defer type="text/javascript">selectPartner({{this.artworkToUpdate.partner_id}})</script>
 </div>
