@@ -114,7 +114,7 @@ module.exports = function() {
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 			if(error) {
 				console.log(JSON.stringify(error));
-				res.redirect('/artwork');
+				res.redirect('/artwork#error');
 			}
 			else {
 				sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = ? and date = ?), ?)";
@@ -135,7 +135,7 @@ module.exports = function() {
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					if(error) {
 						console.log(JSON.stringify(error));
-						res.redirect('/artwork');
+						res.redirect('/artwork#error');
 					}
 					else {
 						res.redirect('/artwork');

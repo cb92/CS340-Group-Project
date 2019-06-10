@@ -71,7 +71,7 @@ module.exports = function() {
 		sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 			if (error) {
 				console.log(JSON.stringify(error));
-				res.redirect('/artist');
+				res.redirect('/artist#error');
 			} else
 			{
 				sql = "INSERT INTO artwork (title, artist_id, category, date, thumbnail_url, partner_id) VALUES (?, (SELECT id FROM artist WHERE name = ? and birthday=?), ?, ?, ?, ?);";
@@ -83,7 +83,7 @@ module.exports = function() {
 				sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 					if(error) {
 						console.log(JSON.stringify(error));
-						res.redirect('/artist');
+						res.redirect('/artist#error');
 					}
 					else {
 						sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES ((SELECT id FROM artwork where title=? and artist_id = (SELECT id FROM artist WHERE name = ? and birthday=?) and date = ?), ?)";
@@ -104,7 +104,7 @@ module.exports = function() {
 						sql = mysql.pool.query(sql, inserts, function(error, results, fields){
 							if(error) {
 								console.log(JSON.stringify(error));
-								res.redirect('/artist');
+								res.redirect('/artist#error');
 							}
 							else {
 								res.redirect('/artist');

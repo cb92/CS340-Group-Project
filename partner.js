@@ -40,7 +40,7 @@ module.exports = function() {
     sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
       if (error) {
 				console.log(JSON.stringify(error));
-        res.redirect('/partner');
+        res.redirect('/partner#error');
       } else {
 				res.redirect('/partner');
       }
