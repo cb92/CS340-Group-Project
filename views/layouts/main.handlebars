@@ -28,12 +28,14 @@
 		</div>
 	</nav>
 
-	<div id = "err-alert" class="alert alert-danger alert-dismissable fade show" role="alert">
+	<div id = "err-alert" class="alert alert-danger alert-dismissable fade" role="alert">
 		<h4>Oops!</h4>
-  		<p>There appears to have been an error in inserting that record. Make sure that your new record meets uniqueness constraints, and try again.</p>
-  		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  		<p>There appears to have been an error in inserting that record. Make sure that your new record meets uniqueness constraints, and try again. 
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		    <span aria-hidden="true">&times;</span>
-	  	</button>
+	  		</button>
+	 	</p>
+  		
 	</div>
 
 	{{{body}}}
@@ -50,6 +52,10 @@
 		if (window.location.href.indexOf("#error") == -1) // not error
 		{
 			$("#err-alert").remove();
+		}
+		else 
+		{
+			$("#err-alert").addClass("show");
 		}
 	</script>
 
