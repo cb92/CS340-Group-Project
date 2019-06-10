@@ -3,7 +3,7 @@ module.exports = function() {
 	var router = express.Router();
 
 	//Retrieve from Database
-  function getGenes(res, mysql, context, complete)
+	function getGenes(res, mysql, context, complete)
 	{
 		mysql.pool.query("SELECT name, description FROM gene", function(error, results, fields){
 			if (error)
@@ -17,7 +17,7 @@ module.exports = function() {
 		});
 	};
 
-  function getArtworks(res, mysql, context, complete)
+	function getArtworks(res, mysql, context, complete)
 	{
 		mysql.pool.query("SELECT id, title FROM artwork", function(error, results, fields){
 			if (error)
@@ -34,11 +34,11 @@ module.exports = function() {
 	router.get("/", function(req, res){
 		var callbackCount = 0;
 		var context = {};
-    context.jsscripts=["filter.js"];
-    context.title="Gene";
+		context.jsscripts=["filter.js"];
+		context.title="Gene";
 		var mysql = req.app.get("mysql");
 		getGenes(res, mysql, context, complete);
-    getArtworks(res, mysql, context, complete);
+		getArtworks(res, mysql, context, complete);
 		function complete() {
 			callbackCount++;
 			if (callbackCount == 2)
@@ -47,44 +47,44 @@ module.exports = function() {
 	});
 
 	//For all post requests: form submissions (insert new gene & new artwork_gene relationship)
-  router.post("/", function(req, res){
-    var mysql = req.app.get("mysql");
-    var inserts = [req.body.name, req.body.description];
+	router.post("/", function(req, res){
+		var mysql = req.app.get("mysql");
+		var inserts = [req.body.name, req.body.description];
 
-    var sql = "INSERT INTO gene (name, description) VALUES (?, ?)";
-    sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
-      if (error) {
+		var sql = "INSERT INTO gene (name, description) VALUES (?, ?)";
+		sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+			if (error) {
 				console.log(JSON.stringify(error));
 				res.redirect('/gene#error');
-      } else {
+			} else {
 
-        sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES (?, (SELECT id FROM gene WHERE name = ?))";
-        if (typeof req.body.artworks_to_link != "object")
-        {
-          sql+=";";
-          inserts = [req.body.artworks_to_link, req.body.name];
-        }
-        else {
-          inserts = [req.body.artworks_to_link[0], req.body.name];
-          for (let i=1; i<req.body.artworks_to_link.length; i++)
-          {
-            sql+=", (?, (SELECT id FROM gene WHERE name = ?))";
-            inserts.push(req.body.artworks_to_link[i], req.body.name);
-          }
-          sql+=";";
-        }
+				sql = "INSERT INTO artwork_gene (artwork_id, gene_id) VALUES (?, (SELECT id FROM gene WHERE name = ?))";
+				if (typeof req.body.artworks_to_link != "object")
+				{
+					sql+=";";
+					inserts = [req.body.artworks_to_link, req.body.name];
+				}
+				else {
+					inserts = [req.body.artworks_to_link[0], req.body.name];
+					for (let i=1; i<req.body.artworks_to_link.length; i++)
+					{
+						sql+=", (?, (SELECT id FROM gene WHERE name = ?))";
+						inserts.push(req.body.artworks_to_link[i], req.body.name);
+					}
+					sql+=";";
+				}
 
-        sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
-          if (error) {
+				sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+					if (error) {
 						console.log(JSON.stringify(error));
 						res.redirect('/gene#error');
-          } else {
-            res.redirect('/gene');
-          }
-        });
-      }
-    });
-   });
+					} else {
+						res.redirect('/gene');
+					}
+				});
+			}
+		});
+	});
 
-  return router;
+	return router;
 }();

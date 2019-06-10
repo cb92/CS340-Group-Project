@@ -2,24 +2,24 @@
   <h2>Link Artist/Partner:</h2>
   <p>Please link artists and partners that collaborate together. Select one artist and partner to link at a time.</p>
   <form id="newArtistPartner" action="/artistPartner" method="post" >
-      Artist: <br>
-      <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist-options')"><br-->
-      <select required name="artist">
-        {{#each artists}}
-        <option class = "artist-options" value={{this.id}}>{{this.name}}</option>
-        {{/each}}
-      </select> <br>
-      Partner: <br>
-      <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
-      <select required id="partner_to_link" name="partner">
-        {{#each partners}}
-        <option class="partner-options" value={{this.id}}>{{this.name}}</option>
-        {{/each}}
-      </select> <br>
+    Artist: <br>
+    <!--input type="text" id="artist-search-string" onkeyup="filterValues('artist-search-string','.artist-options')"><br-->
+    <select required name="artist">
+      {{#each artists}}
+      <option class = "artist-options" value={{this.id}}>{{this.name}}</option>
+      {{/each}}
+    </select> <br>
+    Partner: <br>
+    <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
+    <select required id="partner_to_link" name="partner">
+      {{#each partners}}
+      <option class="partner-options" value={{this.id}}>{{this.name}}</option>
+      {{/each}}
+    </select> <br>
 
 
 
-      <input type="submit"  class = "btn btn-primary">
+    <input type="submit"  class = "btn btn-primary">
   </form>
 
 

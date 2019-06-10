@@ -33,10 +33,10 @@ module.exports = function() {
 	function getOneArtwork(res, mysql, context, complete, id)
 	{
 		var sql = "SELECT a.id, a.title, ar.name as artist_name, CASE WHEN a.thumbnail_url IS NULL THEN 'null' ELSE a.thumbnail_url END AS thumbnail_url, a.date, a.category, p.name AS partner_name, p.id AS partner_id\
-			FROM artwork a \
-			LEFT JOIN artist ar ON a.artist_id=ar.id \
-			LEFT JOIN partner p ON a.partner_id = p.id \
-			WHERE a.id=?; ";
+		FROM artwork a \
+		LEFT JOIN artist ar ON a.artist_id=ar.id \
+		LEFT JOIN partner p ON a.partner_id = p.id \
+		WHERE a.id=?; ";
 		mysql.pool.query(sql, id, function(error, results, fields){
 			if (error)
 			{
@@ -65,21 +65,21 @@ module.exports = function() {
 	{
 		mysql.pool.query(
 			"SELECT id, title, case when thumbnail_url is null then 'null' else thumbnail_url end as thumbnail_url, artist_name, date, category, partner_name, GROUP_CONCAT(distinct gene_name SEPARATOR ', ') as gene_names_comb FROM ( \
-				SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name \
-				FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id \
-				left join gene g on ag.gene_id=g.id \
-				left join partner p on a.partner_id = p.id \
-				left join artist ar on a.artist_id=ar.id) a \
+			SELECT a.id, a.title, ar.name as artist_name, a.thumbnail_url, a.date, a.category, g.name as gene_name, p.name as partner_name \
+			FROM artwork a left join artwork_gene ag on a.id=ag.artwork_id \
+			left join gene g on ag.gene_id=g.id \
+			left join partner p on a.partner_id = p.id \
+			left join artist ar on a.artist_id=ar.id) a \
 			GROUP BY id, title, thumbnail_url, artist_name, date, category, partner_name;",
 			function(error, results, fields){
-			if (error)
-			{
-				res.write(JSON.stringify(error));
-				res.end();
-			}
-			context.artwork = results;
-			complete();
-		});
+				if (error)
+				{
+					res.write(JSON.stringify(error));
+					res.end();
+				}
+				context.artwork = results;
+				complete();
+			});
 	};
 
 	//For all get request: render page with table.

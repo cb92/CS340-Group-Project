@@ -4,40 +4,40 @@
   <p>The combination of name, email, and region must be unique. </p>
   <p>Necessary fields are marked with an asterisk </p>
   <form id="newPartner" action="/partner" method="post">
-      *Name: <br>
-      <input required type="text" name="name"> <br>
-      Type: <br>
-      <input type="text" name="type"> <br>
-      Email: <br>
-      <input type="email" name="email"> <br>
-      Region: <br>
-      <input type="text" name="region"> <br>
-      <input type="submit" class = "btn btn-primary">
+    *Name: <br>
+    <input required type="text" name="name"> <br>
+    Type: <br>
+    <input type="text" name="type"> <br>
+    Email: <br>
+    <input type="email" name="email"> <br>
+    Region: <br>
+    <input type="text" name="region"> <br>
+    <input type="submit" class = "btn btn-primary">
   </form>
 
   <h2>Partners:</h2>
-  If a partner is no longer working, please remove them from the list.</br>
+If a partner is no longer working, please remove them from the list.</br>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead class = "thead-light">
-        <th>Name</th>
-        <th>Type</th>
-        <th>Email</th>
-        <th>Region</th>
-        <th>Delete?</th>
-      </thead>
-      <tbody>
-        {{#each partners}}
-        <tr>
-          <td>{{name}}</td>
-          <td>{{type}}</td>
-          <td>{{email}}</td>
-          <td>{{region}}</td>
-          <td><button onclick="deletePartner({{id}})"  class = "btn btn-secondary">Delete</button></td>
-        </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </div>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead class = "thead-light">
+      <th>Name</th>
+      <th>Type</th>
+      <th>Email</th>
+      <th>Region</th>
+      <th>Delete?</th>
+    </thead>
+    <tbody>
+      {{#each partners}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{type}}</td>
+        <td>{{email}}</td>
+        <td>{{region}}</td>
+        <td><button onclick="deletePartner({{id}})"  class = "btn btn-secondary">Delete</button></td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
 </div>

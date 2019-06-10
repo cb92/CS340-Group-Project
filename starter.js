@@ -41,15 +41,15 @@ module.exports = function() {
 	//Make each Table (nested calls)
   function makeArtist(mysql) {
     sqlString = "CREATE TABLE artist (" +
-      "id int(11) NOT NULL AUTO_INCREMENT," +
-    	"name varchar(255) NOT NULL," +
-      "hometown varchar(255)," +
-      "birthday int(11), " +
-      "deathday int(11), " +
-      "biography varchar(255)," +
-      "PRIMARY KEY (id)," +
-      "CONSTRAINT UC_artist UNIQUE (name, birthday))" +
-      "ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
+    "id int(11) NOT NULL AUTO_INCREMENT," +
+    "name varchar(255) NOT NULL," +
+    "hometown varchar(255)," +
+    "birthday int(11), " +
+    "deathday int(11), " +
+    "biography varchar(255)," +
+    "PRIMARY KEY (id)," +
+    "CONSTRAINT UC_artist UNIQUE (name, birthday))" +
+    "ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1";
     mysql.pool.query(sqlString, function(error, results, fields) {
       if(error) {
         console.log(JSON.stringify(error));
@@ -101,27 +101,27 @@ module.exports = function() {
 
   function makeArtwork(mysql) {
     sqlString = "CREATE TABLE artwork (" +
-      "id int(11) NOT NULL AUTO_INCREMENT," +
-      "title varchar(255) NOT NULL," +
-      "artist_id int(11) NOT NULL," +
-      "category varchar(255)," +
-      "date int(11)," +
-      "thumbnail_url varchar(255)," +
-      "partner_id int(11)," +
-      "PRIMARY KEY (id)," +
-      "FOREIGN KEY (artist_id) REFERENCES artist (id) ON DELETE CASCADE," +
-      "FOREIGN KEY (partner_id) REFERENCES partner (id) ON DELETE SET NULL," +
-      "CONSTRAINT UC_artwork UNIQUE (title, artist_id, date)" +
-      ")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;";
+    "id int(11) NOT NULL AUTO_INCREMENT," +
+    "title varchar(255) NOT NULL," +
+    "artist_id int(11) NOT NULL," +
+    "category varchar(255)," +
+    "date int(11)," +
+    "thumbnail_url varchar(255)," +
+    "partner_id int(11)," +
+    "PRIMARY KEY (id)," +
+    "FOREIGN KEY (artist_id) REFERENCES artist (id) ON DELETE CASCADE," +
+    "FOREIGN KEY (partner_id) REFERENCES partner (id) ON DELETE SET NULL," +
+    "CONSTRAINT UC_artwork UNIQUE (title, artist_id, date)" +
+    ")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;";
 
-      mysql.pool.query(sqlString, function(error, results, fields) {
-        if(error) {
-          console.log(JSON.stringify(error));
-        } else {
-          console.log("Artwork Created");
-          makeGene(mysql);
-        }
-      });
+    mysql.pool.query(sqlString, function(error, results, fields) {
+      if(error) {
+        console.log(JSON.stringify(error));
+      } else {
+        console.log("Artwork Created");
+        makeGene(mysql);
+      }
+    });
   }
 
   function makeGene(mysql) {
@@ -167,5 +167,5 @@ module.exports = function() {
     res.render('home');
   });
 
-	return router;
+  return router;
 }();

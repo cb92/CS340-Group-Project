@@ -4,45 +4,45 @@
   <p>The combination of name and birthday must be unique. </p>
   <p>Necessary fields are marked with an asterisk </p>
   <form class="" action="/artist" method="post" id="newArtist">
-      *Name: <br>
-      <input required id = "artist_name" type="text" name="name"> <br>
-      Hometown: <br>
-      <input id = "artist_hometown" type="text" name="hometown" min=1400> <br>
-      Birthday (Year): <br>
-      <input id = "artist_birth" type="number" name="birthday" min=1400> <br>
-      Deathday (Year): <br>
-      <input id = "artist_death" type="number" name="deathday"> <br>
-      Biography: <br>
-      <textarea id = "artist_bio" rows="4" cols="50" name="biography" form="newArtist"></textarea> <br>
-      <br>
-      <br>
-      Artwork: <br>
-      *Title: <br>
-      <input required id = "artwork_title" type="text" name="artwork_title"> <br>
-      Category: <br>
-      <input id = "artwork_category" type="text" name="artwork_category"> <br>
-      Date (Year): <br>
-      <input id = "artwork_date" type="number" name="artwork_date"> <br>
-      Thumbnail URL: <br>
-      <input id = "artwork_thumbnail" type="url" name="artwork_thumbnail"> <br>
-      Partner: <br>
-      <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
-      <select id="new_partner" name="artwork_partner">
-        <option class="partner-options" value="null">None</option>
-        {{#each partners}}
-        <option class="partner-options" value="{{this.id}}">{{this.name}}</option>
-        {{/each}}
-      </select><br>
+    *Name: <br>
+    <input required id = "artist_name" type="text" name="name"> <br>
+    Hometown: <br>
+    <input id = "artist_hometown" type="text" name="hometown" min=1400> <br>
+    Birthday (Year): <br>
+    <input id = "artist_birth" type="number" name="birthday" min=1400> <br>
+    Deathday (Year): <br>
+    <input id = "artist_death" type="number" name="deathday"> <br>
+    Biography: <br>
+    <textarea id = "artist_bio" rows="4" cols="50" name="biography" form="newArtist"></textarea> <br>
+    <br>
+    <br>
+    Artwork: <br>
+    *Title: <br>
+    <input required id = "artwork_title" type="text" name="artwork_title"> <br>
+    Category: <br>
+    <input id = "artwork_category" type="text" name="artwork_category"> <br>
+    Date (Year): <br>
+    <input id = "artwork_date" type="number" name="artwork_date"> <br>
+    Thumbnail URL: <br>
+    <input id = "artwork_thumbnail" type="url" name="artwork_thumbnail"> <br>
+    Partner: <br>
+    <!--input type="text" id="partner-search-string" onkeyup="filterValues('partner-search-string','.partner-options')"><br-->
+    <select id="new_partner" name="artwork_partner">
+      <option class="partner-options" value="null">None</option>
+      {{#each partners}}
+      <option class="partner-options" value="{{this.id}}">{{this.name}}</option>
+      {{/each}}
+    </select><br>
 
-      *Gene (Select at least one): <br>
-      <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')" placeholder="Search for Genes..."><br>
-      <select multiple required id = "artwork_genes" name="genes_to_link">
-        {{#each genes}}
-          <option class = "gene_options" value={{this.id}} >{{this.name}}</option>
-        {{/each}}
-      </select> <br>
+    *Gene (Select at least one): <br>
+    <input type="text" id="gene_search_string" onkeyup="filterValues('gene_search_string','.gene_options')" placeholder="Search for Genes..."><br>
+    <select multiple required id = "artwork_genes" name="genes_to_link">
+      {{#each genes}}
+      <option class = "gene_options" value={{this.id}} >{{this.name}}</option>
+      {{/each}}
+    </select> <br>
 
-      <input type="submit"  class = "btn btn-primary">
+    <input type="submit"  class = "btn btn-primary">
   </form>
 
   <br>

@@ -5,8 +5,6 @@ function updateArtwork(id)
 		type:'PUT',
 		data: $('#move-artwork').serialize(),
 		success: function(result) { window.location.replace("./");	}
-
-
 	})
 };
 
