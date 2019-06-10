@@ -47,9 +47,9 @@
 
 	<!-- Script to show alert div if there was an error (technically, hide it if there was not an error)-->
 	<script defer type="text/javascript">
-		if (window.location.href.indexOf("#error") == -1) // not error
+		if (window.location.href.indexOf("#error") != -1) // not error
 		{
-			$("#err-alert").hide();
+			$("#err-alert").show();
 		}
 	</script>
 
